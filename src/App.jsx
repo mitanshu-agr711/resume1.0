@@ -4,7 +4,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import ResumeState from './context/resume.context.jsx';
 // import Home from './Pages/Home/Home';
-// import Navbar from './Components/Navbar/Navbar';
+import Navbar from './components/NavaBar/navbar.jsx';
 import About from './pages/about.jsx';
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
           <meta name="keywords" content="resume builder, professional resumes, online resumes, resume templates" />
           <meta name="author" content="Mitanshu Agrawal" />
         </Helmet>
-        {/* <Navbar /> */}
+        <Navbar />
         <Routes>
           {/* <Route exact path="/" element={<Home />} />
           <Route exact path="/home" element={<Home />} /> */}

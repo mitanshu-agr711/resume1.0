@@ -1,7 +1,7 @@
 import { Box, Flex, HStack, IconButton, useDisclosure, useColorMode, useColorModeValue, Stack, Button } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { Link as ReachLink } from 'react-router-dom'
-import logo from '../public/assets/cv.png';
+import logo from '../../../public/assets/cv.png';
 
 
 export default function Navbar() {
