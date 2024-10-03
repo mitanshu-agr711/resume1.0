@@ -1,6 +1,7 @@
-import React from 'react';
+// import React from 'react';
 import { Helmet } from 'react-helmet';
 import './App.css';
+import './index.css';
 import { Routes, Route } from 'react-router-dom';
 import ResumeState from './context/resume.context.jsx';
 // import Home from './Pages/Home/Home';
