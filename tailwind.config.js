@@ -1,9 +1,11 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 export default {
-  content: ["./src/**/*.{html,js}"],
+  content: [
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}', // Adjust this based on your src folder structure
+  ],
   theme: {
     extend: {},
   },
   plugins: [],
 }
-
