@@ -1,53 +1,56 @@
-import { Box, Flex, HStack, IconButton, useDisclosure, useColorMode, useColorModeValue, Stack, Button } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { Link as ReachLink } from 'react-router-dom'
-import logo from '../../../public/assets/cv.png';
 
+import { useState } from 'react';
+import { Link as ReachLink } from 'react-router-dom';
+import logo from '/assets/cv.png'; 
 
 export default function Navbar() {
-    const { colorMode, toggleColorMode } = useColorMode();
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [isOpen, setIsOpen] = useState(false);
+    const [colorMode, setColorMode] = useState('light');
+
+    const toggleMenu = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const toggleColorMode = () => {
+        setColorMode(colorMode === 'light' ? 'dark' : 'light');
+    };
 
     return (
         <>
-            <Box id='navbar' bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-                <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+        
+            <nav className={`${colorMode === 'light' ? 'bg-gray-100' : 'bg-gray-900'} px-4`}>
+                <div className="flex h-16 items-center justify-between">
+               
                     <ReachLink to='/'>
-                        <Box><img style={{ height: '44px' }} className='logo' src={logo} alt="logo" /></Box>
+                        <img className="h-2 logo" src={logo} alt="logo" />
                     </ReachLink>
 
-                    <HStack spacing={8} alignItems={'center'}>
-                        <HStack
-                            as={'nav'}
-                            spacing={4}
-                            display={{ base: 'none', md: 'flex' }}>
-                            <ReachLink px={2} py={1} rounded={'md'} _hover={{ textDecoration: 'none', bg: 'gray.200' }} to={'/'} >Home </ReachLink>
-                            <ReachLink px={2} py={1} rounded={'md'} _hover={{ textDecoration: 'none', bg: 'gray.200' }} to={'/about'}> About</ReachLink>
-                        </HStack>
-                        <Button onClick={toggleColorMode}>
-                            {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-                        </Button>
-                    </HStack>
+                    <div className='bg-black w-14 h-32'>
+                    </div>
+                    <div className="hidden md:flex items-center space-x-8">
+                        <ReachLink className="px-2 py-1 rounded-md hover:bg-gray-200" to='/'>Home</ReachLink>
+                        <ReachLink className="px-2 py-1 rounded-md hover:bg-gray-200" to='/about'>About</ReachLink>
+                        <button onClick={toggleColorMode} className="p-2 rounded-md">
+                            {colorMode === 'light' ? '🌙' : '☀️'}
+                        </button>
+                    </div>
 
-                    <IconButton
-                        size={'md'}
-                        icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-                        aria-label={'Open Menu'}
-                        display={{ md: 'none' }}
-                        onClick={isOpen ? onClose : onOpen}
-                    />
+                    
+                    <button onClick={toggleMenu} className="md:hidden p-2 text-xl">
+                        {isOpen ? '✖️' : '☰'}
+                    </button>
+                </div>
 
-                </Flex>
-
-                {isOpen ? (
-                    <Box pb={4} display={{ md: 'none' }}>
-                        <Stack as={'nav'} spacing={4}>
-                            <ReachLink px={2} py={1} rounded={'md'} _hover={{ textDecoration: 'none', bg: 'gray.200' }} to={'/'} >Home </ReachLink>
-                            <ReachLink px={2} py={1} rounded={'md'} _hover={{ textDecoration: 'none', bg: 'gray.200' }} to={'/about'}> About</ReachLink>
-                        </Stack>
-                    </Box>
-                ) : null}
-            </Box>
+  
+                {isOpen && (
+                    <div className="md:hidden pb-4">
+                        <div className="flex flex-col space-y-4">
+                            <ReachLink className="px-2 py-1 rounded-md hover:bg-gray-200" to='/'>Home</ReachLink>
+                            <ReachLink className="px-2 py-1 rounded-md hover:bg-gray-200" to='/about'>About</ReachLink>
+                        </div>
+                    </div>
+                )}
+            </nav>
         </>
     );
 }
