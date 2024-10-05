@@ -1,42 +1,37 @@
-import {  useContext } from "react";
-import Introduction from "../../Components/Intro/Introduction";
-import ResumeContext from "../../Context/ResumeContext";
-import BuilderArea from "../BuilderArea";
-import Theme1 from "./../../Theme/Theme1/Theme1";
-import Theme2 from "../../Theme/Theme2/Theme2";
-import Theme3 from "../../Theme/Theme3/Theme3";
-import Theme4 from "../../Theme/Theme4/theme4";
-import ErrorPage from "../Error/ErrorPage";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import Introduction from "../../components/section/intro.jsx";
+import ResumeContext from "../../context/resume.state.jsx";
+import Theme1 from "../../themes/themes1.jsx";
 
 const Home = () => {
   const { currentTheme, showComponent, themeData, componentRef } =
-    useContext(ResumeContext);
+  useContext(ResumeContext);
+  const navigate = useNavigate();
+
+  if (showComponent) {
+    switch (currentTheme) {
+      case "Theme1":
+        navigate("/Theme1");
+        break;
+      case "Theme2":
+        navigate("/theme2");
+        break;
+      case "Theme3":
+        navigate("/theme3");
+        break;
+      case "Theme4":
+        navigate("/theme4");
+        break;
+      default:
+        navigate("/error");
+        break;
+    }
+  }
 
   return (
     <>
-      {!showComponent && <Introduction />}
-      {showComponent && currentTheme === "Theme1" && (
-        <BuilderArea
-          theme={<Theme1 componentRef={componentRef} themeData={themeData} />}
-        />
-      )}
-      {showComponent && currentTheme === "Theme2" && (
-        <BuilderArea
-          theme={<Theme2 componentRef={componentRef} themeData={themeData} />}
-        />
-      )}
-      {showComponent && currentTheme === "Theme3" && (
-        <BuilderArea
-          theme={<Theme3 componentRef={componentRef} themeData={themeData} />}
-        />
-      )}
-      {showComponent && currentTheme === "Theme4" && (
-        <BuilderArea
-          theme={<Theme4 componentRef={componentRef} themeData={themeData} />}
-        />
-      )}
-      {showComponent && currentTheme === "Theme5" && <ErrorPage />}
-      {}
+     <Introduction />
     </>
   );
 };

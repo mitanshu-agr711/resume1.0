@@ -12,11 +12,7 @@ const testimonials = [
 ];
 
 function TestimonialCard(props) {
-    const name = props.name;
-    const role = props.role;
-    const content = props.content;
-    const avatar = props.avatar;
-    console.log(name);
+    const { name, role, content, avatar } = props;
     return (
         <div className="flex flex-col md:flex-row max-w-2xl w-full rounded-xl p-10 shadow-lg bg-grey-200">
             <div className="flex flex-col justify-between text-left">
@@ -37,7 +33,7 @@ function TestimonialCard(props) {
     );
 }
 
-export default function About({colorMode}) {
+export default function About(colorMode) {
     return (
         <>
             <Helmet>

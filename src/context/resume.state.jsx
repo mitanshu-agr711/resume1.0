@@ -4,7 +4,7 @@ import { useReactToPrint } from "react-to-print";
 
 const ResumeState = (props) => {
   const componentRef = useRef();
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -53,7 +53,7 @@ const ResumeState = (props) => {
   const [showComponent, setShowComponent] = useState(false);
   const [currentTheme, setCurrentTheme] = useState("Theme1");
   const [selectBtn, setSelectBtn] = useState(true);
-
+  const [loading, setLoading] = useState(false);
   return (
     <ResumeContext.Provider
       value={{
@@ -78,7 +78,7 @@ const ResumeState = (props) => {
         setCheckWork,
       }}
     >
-      {props.children}
+        {props.children}
     </ResumeContext.Provider>
   );
 };

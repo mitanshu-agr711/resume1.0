@@ -2,12 +2,17 @@
 import  { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Routes, Route } from 'react-router-dom';
-import ResumeState from './context/resume.context.jsx';
+import ResumeState from './context/resumeCreate.jsx';
 import Navbar from './components/NavaBar/navbar.jsx';
 import About from './pages/about.jsx';
+import Home from './pages/Home/home.jsx';
+import './index.css';
 
 function App() {
-  const [colorMode, setColorMode] = useState('light');
+  const [colorMode, setColorMode] = useState(() => {
+   
+    return localStorage.getItem('colorMode') || 'light';
+  });
 
   useEffect(() => {
     if (colorMode === 'dark') {
@@ -15,6 +20,8 @@ function App() {
     } else {
       document.body.classList.remove('bg-gray-800');
     }
+   
+    localStorage.setItem('colorMode', colorMode);
   }, [colorMode]);
 
   const toggleColorMode = () => {
@@ -31,8 +38,11 @@ function App() {
           <meta name="author" content="Mitanshu Agrawal" />
         </Helmet>
         <Navbar toggleColorMode={toggleColorMode} colorMode={colorMode} />
+
         <Routes>
-          <Route exact path="/about" element={<About colorMode={colorMode} />} /> {/* Pass colorMode here */}
+          <Route exact path="/" element={<Home colorMode={colorMode} />} />
+          <Route exact path="/about" element={<About colorMode={colorMode} />} />
+          <Route exact path="/theme1" element={<Home colorMode={colorMode} />} />
         </Routes>
       </div>
     </ResumeState>
@@ -40,3 +50,5 @@ function App() {
 }
 
 export default App;
+
+
