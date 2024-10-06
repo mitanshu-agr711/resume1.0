@@ -1,37 +1,42 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Introduction from "../../components/section/intro.jsx";
-import ResumeContext from "../../context/resume.state.jsx";
-import Theme1 from "../../themes/themes1.jsx";
+import ResumeContext from "../../context/resumeCreate.jsx";
 
 const Home = () => {
-  const { currentTheme, showComponent, themeData, componentRef } =
-  useContext(ResumeContext);
+  const { showComponent } = useContext(ResumeContext);
   const navigate = useNavigate();
+  const templates = [
+    { id: "Theme1", name: "Template 1" },
+    { id: "Theme2", name: "Template 2" },
+    { id: "Theme3", name: "Template 3" },
+    { id: "Theme4", name: "Template 4" },
+  ];
 
-  if (showComponent) {
-    switch (currentTheme) {
-      case "Theme1":
-        navigate("/Theme1");
-        break;
-      case "Theme2":
-        navigate("/theme2");
-        break;
-      case "Theme3":
-        navigate("/theme3");
-        break;
-      case "Theme4":
-        navigate("/theme4");
-        break;
-      default:
-        navigate("/error");
-        break;
-    }
-  }
+
+  const handleTemplateClick = (templateId) => {
+    navigate(`/${templateId}`);
+  };
 
   return (
     <>
-     <Introduction />
+      <Introduction />
+      <h2>Select a Template</h2>
+   
+      <div>
+        {templates.map((template) => (
+          <button key={template.id} onClick={() => handleTemplateClick(template.id)}>
+            {template.name}
+          </button>
+        ))}
+      </div>
+
+     
+      {showComponent && (
+        <div>
+       {}
+        </div>
+      )}
     </>
   );
 };
