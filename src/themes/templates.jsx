@@ -1,13 +1,13 @@
+import { Link } from 'react-router-dom';
 import ThemeTemplateData from '../collection/themes.jsx';
-// import { useNavigate } from 'react-router-dom';
+// imoprt Link from 'react-router-dom';
 
 const Template = () => {
-    // const navigate = useNavigate();
 
-    // const handleSelectTheme = (id) => {
-
-    //     navigate(`/theme/${id}`);
-    // };
+    const handleSelectTemplate = (id) => {
+        console.log(`/${id}`);
+        return <Link to={`/${id}`} />;
+    }
 
     return (
         <>
@@ -25,6 +25,8 @@ const Template = () => {
                     <div
                         key={index}
                         className="template cursor-pointer"
+                        onClick={() => handleSelectTemplate(item.id)}
+                       
                     >
                         <img
                             id={item.id}

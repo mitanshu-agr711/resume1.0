@@ -9,7 +9,7 @@ import Home from './pages/Home/home.jsx';
 import './index.css';
 import Template from './themes/templates.jsx';
 import Theme1 from "./themes/themes1.jsx"; 
-
+import ThemeTemplateData from './collection/themes.jsx';
 // import Theme2 from "./themes/Theme2.jsx"; 
 // import Theme3 from "./themes/Theme3.jsx"; 
 // import Theme4 from "./themes/Theme4.jsx";
@@ -43,8 +43,11 @@ import Theme1 from "./themes/themes1.jsx";
         <Routes>
           <Route exact path="/" element={<Home colorMode={colorMode} />} />
           <Route exact path="/about" element={<About colorMode={colorMode} />} />
-          <Route exact path="/theme1" element={<Home colorMode={colorMode} />} />
-          <Route path="/Theme1" element={<Theme1 />} />
+          <Route exact path="/home" element={<Home colorMode={colorMode} />} />
+          <Route
+                    path="/Theme1"
+                    element={<Theme1 themeData={ThemeTemplateData[0]} />} // Pass the appropriate data
+                />
         {/* <Route path="/Theme2" element={<Theme2 />} />
         <Route path="/Theme3" element={<Theme3 />} />
         <Route path="/Theme4" element={<Theme4 />} /> */}

@@ -1,42 +1,36 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import Introduction from "../../components/section/intro.jsx";
 import ResumeContext from "../../context/resumeCreate.jsx";
+// import BuilderArea from "../BuilderArea";
+import Theme1 from "../../themes/themes1.jsx";
+// import Theme2 from "../../themes/themes2.jsx";
+// import Theme3 from "../../themes/themes3.jsx";
+// import Theme4 from "../../themes/themes4.jsx";
+
+// import ErrorPage from "../Error/ErrorPage";
 
 const Home = () => {
-  const { showComponent } = useContext(ResumeContext);
-  const navigate = useNavigate();
-  const templates = [
-    { id: "Theme1", name: "Template 1" },
-    { id: "Theme2", name: "Template 2" },
-    { id: "Theme3", name: "Template 3" },
-    { id: "Theme4", name: "Template 4" },
-  ];
+  const { currentTheme, themeData, componentRef } = useContext(ResumeContext);
 
-
-  // const handleTemplateClick = (templateId) => {
-  //   navigate(`/${templateId}`);
-  // };
+  const renderTheme = () => {
+    switch (currentTheme) {
+      case "Theme1":
+        return <Theme1 componentRef={componentRef} themeData={themeData} />;
+      // case "Theme2":
+      //   return <Theme2 componentRef={componentRef} themeData={themeData} />;
+      // case "Theme3":
+      //   return <Theme3 componentRef={componentRef} themeData={themeData} />;
+      // case "Theme4":
+      //   return <Theme4 componentRef={componentRef} themeData={themeData} />;
+      
+      default:
+        return <Introduction />;
+    }
+  };
 
   return (
     <>
-      <Introduction />
-      {/* <h2>Select a Template</h2>
-   
-      <div>
-        {templates.map((template) => (
-          <button key={template.id} onClick={() => handleTemplateClick(template.id)}>
-            {template.name}
-          </button>
-        ))}
-      </div> */}
-
-     
-      {showComponent && (
-        <div>
-       {}
-        </div>
-      )}
+      <BuilderArea theme={renderTheme()} />
     </>
   );
 };

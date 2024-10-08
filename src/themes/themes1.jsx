@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { ImLocation } from 'react-icons/im';
 import { GrMail } from 'react-icons/gr';
 import { BsFillTelephoneFill } from 'react-icons/bs';
-import PropTypes from 'prop-types'; // Import PropTypes
+import PropTypes from 'prop-types'; 
 import ResumeContext from '../context/resumeCreate.jsx';
 
 const Theme1 = ({ themeData, componentRef }) => {

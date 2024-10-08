@@ -46,16 +46,17 @@ export default function Introduction({ colorMode }) {
                             <p className="text-xl ">Download your resume.</p>
                         </div>
                     </div>
-                </div>
-
-                <div className="flex flex-col items-center space-y-4">
-                    <img src={homeLogo} alt="home logo" className="my-4 w-3/4 md:w-full" />
                     <Link to="/templates"> <button
                         onClick={handleSelectTemplate}
-                        className="bg-teal-500 text-white py-2 px-6 rounded-full hover:bg-teal-600 transition"
+                        className="bg-teal-500 text-white py-2 px-6 rounded-full m-2 hover:bg-teal-600 transition"
                     >
                         Select Template
                     </button></Link>
+                </div>
+
+                <div className="flex flex-col items-center space-y-4">
+                    <img src={homeLogo} alt="home logo" className="my-4 w-2/4 md:w-full h-2/4" />
+                   
                 </div>
             </div>
         </>
