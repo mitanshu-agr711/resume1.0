@@ -33,7 +33,7 @@ function TestimonialCard(props) {
     );
 }
 
-export default function About(colorMode) {
+export default function About({colorMode}) {
     return (
         <>
             <Helmet>

@@ -1,5 +1,5 @@
 import ResumeContext from "./resumeCreate.jsx";
-import { useState, useRef } from "react";
+import { useState, useRef,useEffect } from "react";
 import { useReactToPrint } from "react-to-print";
 import PropTypes from "prop-types";
 const ResumeState = (props) => {
@@ -16,6 +16,22 @@ const ResumeState = (props) => {
     },
   });
 
+  const [colorMode, setColorMode] = useState(() => {
+    return localStorage.getItem('colorMode') || 'light'; // Load from localStorage
+  });
+
+  useEffect(() => {
+    if (colorMode === 'dark') {
+      document.body.classList.add('bg-gray-800');
+    } else {
+      document.body.classList.remove('bg-gray-800');
+    }
+    localStorage.setItem('colorMode', colorMode); // Save the selected mode
+  }, [colorMode]);
+
+  const toggleColorMode = () => {
+    setColorMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+  };
   const initialData = {
     personalData: {
       profileImage:
@@ -74,6 +90,8 @@ const ResumeState = (props) => {
     checkWork,
     setCheckProj,
     setCheckWork,
+    colorMode, 
+    toggleColorMode, 
   };
   return (
     <ResumeContext.Provider value={contextValue}>

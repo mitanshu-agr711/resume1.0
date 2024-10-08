@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link as ReachLink } from 'react-router-dom';
 import logo from '/assets/cv.png'; 
 
-export default function Navbar( toggleColorMode, colorMode ) {
+export default function Navbar({ toggleColorMode, colorMode }) {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {

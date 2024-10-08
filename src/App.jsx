@@ -7,30 +7,27 @@ import Navbar from './components/NavaBar/navbar.jsx';
 import About from './pages/about.jsx';
 import Home from './pages/Home/home.jsx';
 import './index.css';
+import Template from './themes/templates.jsx';
 import Theme1 from "./themes/themes1.jsx"; 
+
 // import Theme2 from "./themes/Theme2.jsx"; 
 // import Theme3 from "./themes/Theme3.jsx"; 
 // import Theme4 from "./themes/Theme4.jsx";
 
-function App() {
-  const [colorMode, setColorMode] = useState(() => {
-   
-    return localStorage.getItem('colorMode') || 'light';
-  });
 
-  useEffect(() => {
-    if (colorMode === 'dark') {
-      document.body.classList.add('bg-gray-800');
-    } else {
-      document.body.classList.remove('bg-gray-800');
-    }
-   
-    localStorage.setItem('colorMode', colorMode);
-  }, [colorMode]);
-
-  const toggleColorMode = () => {
-    setColorMode(colorMode === 'light' ? 'dark' : 'light');
-  };
+  
+  function App() {
+    const [colorMode, setColorMode] = useState('light');
+  
+    useEffect(() => {
+      // Apply/remove dark mode classes on the body
+      document.body.classList.toggle('dark-mode', colorMode === 'dark');
+    }, [colorMode]);
+  
+    const toggleColorMode = () => {
+      setColorMode(prevMode => (prevMode === 'light' ? 'dark' : 'light'));
+    };
+  
 
   return (
     <ResumeState>
@@ -51,6 +48,8 @@ function App() {
         {/* <Route path="/Theme2" element={<Theme2 />} />
         <Route path="/Theme3" element={<Theme3 />} />
         <Route path="/Theme4" element={<Theme4 />} /> */}
+          <Route path="/templates" element={<Template/>} />
+
         </Routes>
       </div>
     </ResumeState>

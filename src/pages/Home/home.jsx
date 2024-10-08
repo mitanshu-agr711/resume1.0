@@ -14,14 +14,14 @@ const Home = () => {
   ];
 
 
-  const handleTemplateClick = (templateId) => {
-    navigate(`/${templateId}`);
-  };
+  // const handleTemplateClick = (templateId) => {
+  //   navigate(`/${templateId}`);
+  // };
 
   return (
     <>
       <Introduction />
-      <h2>Select a Template</h2>
+      {/* <h2>Select a Template</h2>
    
       <div>
         {templates.map((template) => (
@@ -29,7 +29,7 @@ const Home = () => {
             {template.name}
           </button>
         ))}
-      </div>
+      </div> */}
 
      
       {showComponent && (
