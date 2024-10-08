@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { IoMdCloudUpload } from 'react-icons/io';
-import ResumeContext from '../../Context/ResumeContext';
+import ResumeContext from '../../context/resumeCreate.jsx';
 
 const UserDataCollect = () => {
     const { themeData, checkAward, setCheckAward, checkProj, setCheckProj, setThemeData } = useContext(ResumeContext);
@@ -11,7 +11,7 @@ const UserDataCollect = () => {
     const [projArrTemplate, setProjArrTemplate] = useState([]);
     const [educationArrTemplate, setEducationArrTemplate] = useState([]);
     const [workArrTemplate, setWorkArrTemplate] = useState([]);
-    const [projectData, setProjectData] = us   eState({
+    const [projectData, setProjectData] = useState({
         'projectTitles': { pTitle1: "Project Title " },
         'projectDesc': { pDescription1: "Project Description are Shown here , with Bullet Points" }
     });

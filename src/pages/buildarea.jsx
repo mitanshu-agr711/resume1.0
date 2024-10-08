@@ -1,17 +1,16 @@
-import  { useContext } from 'react';
-import { Button } from '@chakra-ui/react';
-import UserDataCollect from '../Components/UserDataCollect/UserDataCollect';
+import { useContext } from 'react';
+import UserDataCollect from '../components/userDetails/userData.jsx';
 // import Footer from '../Components/Footer/Footer';
-import ResumeContext from '../Context/ResumeContext';
+import ResumeContext from '../context/resumeCreate.jsx';
 import PropagateLoader from "react-spinners/PropagateLoader";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 
 const BuilderArea = (props) => {
     const { loading, handlePrint } = useContext(ResumeContext);
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate(); 
 
     const handleSelectNewTemplate = () => {
-        navigate('/templates'); // Navigate to the templates page
+        navigate('/templates');
     };
 
     return (
@@ -25,10 +24,10 @@ const BuilderArea = (props) => {
                 </div>
             </div>
             <div className="flex flex-wrap justify-center mt-5">
-                <Button className='mx-2' colorScheme={'teal'} variant={'outline'} onClick={handlePrint}>Print</Button>
-                <Button className='mx-2' colorScheme={'teal'} variant={'outline'} onClick={handleSelectNewTemplate}>Select Another Template</Button>
+                <button className='mx-2 px-4 py-2 border border-teal-500 text-teal-500 rounded hover:bg-teal-500 hover:text-white' onClick={handlePrint}>Print</button>
+                <button className='mx-2 px-4 py-2 border border-teal-500 text-teal-500 rounded hover:bg-teal-500 hover:text-white' onClick={handleSelectNewTemplate}>Select Another Template</button>
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 }

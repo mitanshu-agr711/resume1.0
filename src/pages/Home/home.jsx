@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import Introduction from "../../components/section/intro.jsx";
 import ResumeContext from "../../context/resumeCreate.jsx";
-// import BuilderArea from "../BuilderArea";
+import BuilderArea from "../buildarea.jsx";
 import Theme1 from "../../themes/themes1.jsx";
 // import Theme2 from "../../themes/themes2.jsx";
 // import Theme3 from "../../themes/themes3.jsx";
