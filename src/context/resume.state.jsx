@@ -70,6 +70,7 @@ const ResumeState = (props) => {
   const [showComponent, setShowComponent] = useState(false);
   const [currentTheme, setCurrentTheme] = useState("Theme1");
   const [selectBtn, setSelectBtn] = useState(true);
+  const [selectedTemplateId, setSelectedTemplateId] = useState(null);
 
   const contextValue = {
     initialData,
@@ -92,6 +93,8 @@ const ResumeState = (props) => {
     setCheckWork,
     colorMode, 
     toggleColorMode, 
+    selectedTemplateId, 
+    setSelectedTemplateId
   };
   return (
     <ResumeContext.Provider value={contextValue}>

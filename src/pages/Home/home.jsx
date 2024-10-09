@@ -2,35 +2,33 @@ import { useContext } from "react";
 import Introduction from "../../components/section/intro.jsx";
 import ResumeContext from "../../context/resumeCreate.jsx";
 import BuilderArea from "../buildarea.jsx";
-import Theme1 from "../../themes/themes1.jsx";
-// import Theme2 from "../../themes/themes2.jsx";
-// import Theme3 from "../../themes/themes3.jsx";
-// import Theme4 from "../../themes/themes4.jsx";
-
+import Theme1 from "../../Theme/Theme1/Theme1";
+// import Theme2 from "../../Theme/Theme2/Theme2";
+// import Theme3 from "../../Theme/Theme3/Theme3";
+// import Theme4 from "../../Theme/Theme4/theme4";
 // import ErrorPage from "../Error/ErrorPage";
 
 const Home = () => {
-  const { currentTheme, themeData, componentRef } = useContext(ResumeContext);
+  const { selectedTemplateId } = useContext(ResumeContext); 
 
   const renderTheme = () => {
-    switch (currentTheme) {
+    switch (selectedTemplateId) {
       case "Theme1":
-        return <Theme1 componentRef={componentRef} themeData={themeData} />;
+        return <BuilderArea theme={<Theme1 />} />;
       // case "Theme2":
-      //   return <Theme2 componentRef={componentRef} themeData={themeData} />;
+      //   return <BuilderArea theme={<Theme2 />} />;
       // case "Theme3":
-      //   return <Theme3 componentRef={componentRef} themeData={themeData} />;
+      //   return <BuilderArea theme={<Theme3 />} />;
       // case "Theme4":
-      //   return <Theme4 componentRef={componentRef} themeData={themeData} />;
-      
-      default:
-        return <Introduction />;
+      //   return <BuilderArea theme={<Theme4 />} />;
+      // default:
+      //   return <ErrorPage />; // Handle error or unknown themes
     }
   };
 
   return (
     <>
-      <BuilderArea theme={renderTheme()} />
+      {selectedTemplateId ? renderTheme() : <Introduction />} {/* Renders Introduction if no template is selected */}
     </>
   );
 };

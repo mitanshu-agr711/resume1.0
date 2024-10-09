@@ -5,7 +5,10 @@ import { BsFillTelephoneFill } from 'react-icons/bs';
 import PropTypes from 'prop-types'; 
 import ResumeContext from '../context/resumeCreate.jsx';
 
-const Theme1 = ({ themeData, componentRef }) => {
+const Theme1 = ({ themeData}) => {
+
+    console.log("themedata4545",{themeData});  // This will help you see what themeData is during render
+
     const { checkProj, checkWork, checkAward } = useContext(ResumeContext);
     const { name, profile, address, phone, email, skill } = themeData.personalData;
     const { projectTitles, projectDesc } = themeData.projectData;
@@ -14,7 +17,7 @@ const Theme1 = ({ themeData, componentRef }) => {
     const { awards } = themeData.awardData;
 
     return (
-        <div id="section-to-print" ref={componentRef}>
+        <div id="section-to-print" >
             <div className="border border-gray-300 dark:border-white p-5" id="theme1">
                 <header id='info' className='text-center mt-4'>
                     <h2 className='text-4xl font-bold mb-4'>{name}</h2>
