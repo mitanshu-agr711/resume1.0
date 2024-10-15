@@ -43,16 +43,21 @@ const UserDataCollect = () => {
     const [awardData, setAwardData] = useState({ awards: 'Your Awards are shown here' });
 
     useEffect(() => {
-        // Update themeData whenever any of the data changes
-        setThemeData({
+        const updatedThemeData = {
             ...themeData,
             personalData,
             projectData,
             educationData,
             workData,
             awardData,
-        });
+        };
+        
+        // Only update if the themeData has changed
+        if (JSON.stringify(themeData) !== JSON.stringify(updatedThemeData)) {
+            setThemeData(updatedThemeData);
+        }
     }, [personalData, projectData, educationData, workData, awardData, setThemeData, themeData]);
+    
 
     // Handler Functions
     const handleChangePersonal = (e) => {
@@ -219,106 +224,107 @@ const UserDataCollect = () => {
 
     return (
         <div className="min-w-1/3 mx-2 my-2">
-            {/* Personal Details Area */}
-            <div className="mb-2">
-                <h2 className="text-lg font-semibold">Personal Data</h2>
-                <input
-                    type="text"
-                    name="name"
-                    onChange={handleChangePersonal}
-                    placeholder="Your Name"
-                    className="border rounded-md p-2 w-full"
-                />
-                <textarea
-                    name="summary"
-                    onChange={handleChangePersonal}
-                    placeholder="Your Summary"
-                    className="border rounded-md p-2 w-full my-2"
-                />
-                <input
-                    type="file"
-                    name="profileImage"
-                    onChange={handleChangePersonal}
-                    className="border rounded-md p-2 w-full my-2"
-                />
-                <input
-                    type="text"
-                    name="address"
-                    onChange={handleChangePersonal}
-                    placeholder="Address"
-                    className="border rounded-md p-2 w-full"
-                />
-                <input
-                    type="text"
-                    name="phone"
-                    onChange={handleChangePersonal}
-                    placeholder="Phone"
-                    className="border rounded-md p-2 w-full"
-                />
-                <input
-                    type="email"
-                    name="email"
-                    onChange={handleChangePersonal}
-                    placeholder="Email"
-                    className="border rounded-md p-2 w-full"
-                />
-                <input
-                    type="text"
-                    name="skill"
-                    onChange={handleChangePersonal}
-                    placeholder="Your Skills"
-                    className="border rounded-md p-2 w-full"
-                />
-            </div>
-
-            {/* Projects Area */}
-            <div className="mb-2">
-                <h2 className="text-lg font-semibold">Projects</h2>
-                {projArrTemplate}
-                <button
-                    onClick={handleProjectClick}
-                    className="bg-blue-500 text-white p-2 rounded"
-                >
-                    Add Project
-                </button>
-            </div>
-
-            {/* Education Area */}
-            <div className="mb-2">
-                <h2 className="text-lg font-semibold">Education</h2>
-                {educationArrTemplate}
-                <button
-                    onClick={handleEducationClick}
-                    className="bg-blue-500 text-white p-2 rounded"
-                >
-                    Add Education
-                </button>
-            </div>
-
-            {/* Work Area */}
-            <div className="mb-2">
-                <h2 className="text-lg font-semibold">Work Experience</h2>
-                {workArrTemplate}
-                <button
-                    onClick={handleWorkClick}
-                    className="bg-blue-500 text-white p-2 rounded"
-                >
-                    Add Work Experience
-                </button>
-            </div>
-
-            {/* Awards Area */}
-            <div className="mb-2">
-                <h2 className="text-lg font-semibold">Awards</h2>
-                <button
-                    onClick={handleAwardClick}
-                    className="bg-blue-500 text-white p-2 rounded"
-                >
-                    Add Award
-                </button>
-                {awardData.awards}
-            </div>
+        {/* Personal Details */}
+        <div className="mb-2">
+          <h2 className="text-lg font-semibold">Personal Data</h2>
+          <input
+            type="text"
+            name="name"
+            onChange={handleChangePersonal}
+            placeholder="Your Name"
+            className="border rounded-md p-2 w-full"
+          />
+          <textarea
+            name="summary"
+            onChange={handleChangePersonal}
+            placeholder="Your Summary"
+            className="border rounded-md p-2 w-full my-2"
+          />
+          <input
+            type="file"
+            name="profileImage"
+            onChange={handleChangePersonal}
+            className="border rounded-md p-2 w-full my-2"
+          />
+          <input
+            type="text"
+            name="address"
+            onChange={handleChangePersonal}
+            placeholder="Address"
+            className="border rounded-md p-2 w-full"
+          />
+          <input
+            type="text"
+            name="phone"
+            onChange={handleChangePersonal}
+            placeholder="Phone"
+            className="border rounded-md p-2 w-full"
+          />
+          <input
+            type="email"
+            name="email"
+            onChange={handleChangePersonal}
+            placeholder="Email"
+            className="border rounded-md p-2 w-full"
+          />
+          <input
+            type="text"
+            name="skill"
+            onChange={handleChangePersonal}
+            placeholder="Your Skills"
+            className="border rounded-md p-2 w-full"
+          />
         </div>
+      
+        {/* Projects */}
+        <div className="mb-2">
+          <h2 className="text-lg font-semibold">Projects</h2>
+          {projArrTemplate}
+          <button
+            onClick={handleProjectClick}
+            className="bg-blue-500 text-white p-2 rounded"
+          >
+            Add Project
+          </button>
+        </div>
+      
+        {/* Education */}
+        <div className="mb-2">
+          <h2 className="text-lg font-semibold">Education</h2>
+          {educationArrTemplate}
+          <button
+            onClick={handleEducationClick}
+            className="bg-blue-500 text-white p-2 rounded"
+          >
+            Add Education
+          </button>
+        </div>
+      
+        {/* Work Experience */}
+        <div className="mb-2">
+          <h2 className="text-lg font-semibold">Work Experience</h2>
+          {workArrTemplate}
+          <button
+            onClick={handleWorkClick}
+            className="bg-blue-500 text-white p-2 rounded"
+          >
+            Add Work Experience
+          </button>
+        </div>
+      
+        {/* Awards */}
+        <div className="mb-2">
+          <h2 className="text-lg font-semibold">Awards</h2>
+          <button
+            onClick={handleAwardClick}
+            className="bg-blue-500 text-white p-2 rounded"
+          >
+            Add Award
+          </button>
+          {awardData.awards}
+        </div>
+      </div>
+      
     );
 };
 

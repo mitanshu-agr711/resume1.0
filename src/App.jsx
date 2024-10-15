@@ -8,10 +8,10 @@ import About from './pages/about.jsx';
 import Intro from './components/section/intro.jsx'
 import './index.css';
 import Template from './themes/templates.jsx';
-import Themes1 from "./themes/themes1.jsx"; 
+// import Themes1 from "./themes/themes1.jsx"; 
 import Build from "./pages/buildarea.jsx"
 
-import  ResumeContext  from './context/resumeCreate.jsx';
+// import  ResumeContext  from './context/resumeCreate.jsx';
 // import Theme2 from "./themes/Theme2.jsx"; 
 // import Theme3 from "./themes/Theme3.jsx"; 
 // import Theme4 from "./themes/Theme4.jsx";

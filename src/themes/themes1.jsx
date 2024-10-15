@@ -6,9 +6,6 @@ import PropTypes from 'prop-types';
 import ResumeContext from '../context/resumeCreate.jsx';
 
 const Theme1 = ({ themeData}) => {
-
-    console.log("themedata4545",{themeData});  
-
     const { checkProj, checkWork, checkAward } = useContext(ResumeContext);
     const { name, profile, address, phone, email, skill } = themeData.personalData;
     const { projectTitles, projectDesc } = themeData.projectData;
@@ -17,8 +14,8 @@ const Theme1 = ({ themeData}) => {
     const { awards } = themeData.awardData;
 
     return (
-        <div id="section-to-print" >
-            <div className="border border-gray-300 dark:border-white p-5" id="theme1">
+        <div id="section-to-print">
+            <div className="border border-gray-300 dark:border-white p-5 w-[90%] mx-auto" id="theme1">
                 <header id='info' className='text-center mt-4'>
                     <h2 className='text-4xl font-bold mb-4'>{name}</h2>
                     <p className='text-md text-gray-600 mb-4'>
@@ -35,7 +32,7 @@ const Theme1 = ({ themeData}) => {
                     <div id='skills-set' className='flex justify-center items-center my-2'>
                         <div className='flex flex-wrap gap-2'>
                             {skill.split(',').map((element, index) => (
-                                <span key={index} className="bg-teal-500 text-white px-3 py-1 rounded">{element.trim()}</span>
+                                <span key={index} className="bg-teal-200 text-black m-1 px-3 py-1 rounded">{element.trim()}</span>
                             ))}
                         </div>
                     </div>
