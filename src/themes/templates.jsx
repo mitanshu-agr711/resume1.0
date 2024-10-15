@@ -2,11 +2,16 @@
 import  { useContext } from 'react';
 import ResumeContext  from '../context/resumeCreate.jsx';
 import ThemeTemplateData from '../collection/themes.jsx';
+import { useNavigate } from 'react-router-dom';
+import Build from '../pages/buildarea.jsx'
 
 const Template = () => {
   const { setSelectedTemplateId } = useContext(ResumeContext);
+  const navigate = useNavigate();
   const handleSelectTemplate = (id) => {
+    // console.log("Selected template ID:", id); 
     setSelectedTemplateId(id); 
+    navigate('/build');
   };
   return (
     <div className="flex flex-col items-center space-y-4">

@@ -7,7 +7,7 @@ import ResumeContext from '../context/resumeCreate.jsx';
 
 const Theme1 = ({ themeData}) => {
 
-    console.log("themedata4545",{themeData});  // This will help you see what themeData is during render
+    console.log("themedata4545",{themeData});  
 
     const { checkProj, checkWork, checkAward } = useContext(ResumeContext);
     const { name, profile, address, phone, email, skill } = themeData.personalData;

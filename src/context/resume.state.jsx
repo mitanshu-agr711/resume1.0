@@ -99,11 +99,11 @@ const ResumeState = (props) => {
   return (
     <ResumeContext.Provider value={contextValue}>
       {props.children}
-      {loading && <div>Loading...</div>} {/* Optional loading indicator */}
+      {loading && <div>Loading...</div>} 
     </ResumeContext.Provider>
   );
 };
 ResumeState.propTypes = {
-  children: PropTypes.node.isRequired, // Validate children prop
+  children: PropTypes.node.isRequired, 
 };
 export default ResumeState;
