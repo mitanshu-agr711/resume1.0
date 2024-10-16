@@ -5,6 +5,7 @@ import PropagateLoader from "react-spinners/PropagateLoader";
 import { useNavigate } from 'react-router-dom';
 import ThemeTemplateData from '../collection/themes.jsx';
 import React from 'react';
+import Footer from '../components/footer/footer.jsx';
 
 const BuilderArea = (props) => {
     const { loading, selectedTemplateId, handlePrint, themeData } = useContext(ResumeContext);
@@ -55,6 +56,7 @@ const BuilderArea = (props) => {
                     Select Another Template
                 </button>
             </div>
+            <Footer/>
         </>
     );
 }

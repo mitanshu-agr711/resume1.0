@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { IoMdCloudUpload } from 'react-icons/io';
 import ResumeContext from '../../context/resumeCreate.jsx';
 
-const UserDataCollect = () => {
+const UserDataCollect = ({colorMode}) => {
     const {
         themeData,
         checkAward,

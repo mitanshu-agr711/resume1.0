@@ -3,7 +3,8 @@ import  { useContext } from 'react';
 import ResumeContext  from '../context/resumeCreate.jsx';
 import ThemeTemplateData from '../collection/themes.jsx';
 import { useNavigate } from 'react-router-dom';
-import Build from '../pages/buildarea.jsx'
+// import Build from '../pages/buildarea.jsx'
+import Footer from '../components/footer/footer.jsx';
 
 const Template = () => {
   const { setSelectedTemplateId } = useContext(ResumeContext);
@@ -14,6 +15,7 @@ const Template = () => {
     navigate('/build');
   };
   return (
+    <>
     <div className="flex flex-col items-center space-y-4">
       <h1 className="font-bold text-3xl md:text-6xl leading-tight my-4">
         Select a <span className="text-teal-500"> Template </span> from the list
@@ -35,7 +37,10 @@ const Template = () => {
           </div>
         ))}
       </div>
+      
     </div>
+    <Footer/>
+    </>
   );
 };
 

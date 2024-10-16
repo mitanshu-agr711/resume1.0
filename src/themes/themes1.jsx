@@ -15,7 +15,7 @@ const Theme1 = ({ themeData}) => {
 
     return (
         <div id="section-to-print">
-            <div className="border border-gray-300 dark:border-white p-5 w-[90%] mx-auto" id="theme1">
+            {/* <div className="border border-gray-300 dark:border-white p-5 w-[90%] mx-auto" id="theme1"> */}
                 <header id='info' className='text-center mt-4'>
                     <h2 className='text-4xl font-bold mb-4'>{name}</h2>
                     <p className='text-md text-gray-600 mb-4'>
@@ -106,7 +106,7 @@ const Theme1 = ({ themeData}) => {
                         </div>
                     </section>
                 )}
-            </div>
+            {/* </div> */}
         </div>
     );
 };
