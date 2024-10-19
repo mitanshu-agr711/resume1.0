@@ -101,14 +101,14 @@ const UserDataCollect = ({colorMode}) => {
                         onChange={handleChangeProject}
                         type="text"
                         placeholder="Enter Project Title"
-                        className="border rounded-md p-2 w-full"
+                         className="border rounded-md p-2 w-full text-black"
                     />
                     <textarea
                         id={`pDescription${i}`}
                         name="pDescription"
                         onChange={handleChangeProject}
                         placeholder="Use comma to separate Description"
-                        className="border rounded-md p-2 w-full my-2"
+                         className="border rounded-md p-2 w-full text-black"
                     />
                 </div>
             );
@@ -143,14 +143,14 @@ const UserDataCollect = ({colorMode}) => {
                     onChange={handleChangeEducation}
                     type="text"
                     placeholder="Enter Title"
-                    className="border rounded-md p-2 w-full"
+                     className="border rounded-md p-2 w-full text-black"
                 />
                 <textarea
                     id={`eDescription${i}`}
                     name="eDescription"
                     onChange={handleChangeEducation}
                     placeholder="Use comma to separate Description"
-                    className="border rounded-md p-2 w-full my-2"
+                     className="border rounded-md p-2 w-full text-black"
                 />
             </div>
         );
@@ -184,14 +184,14 @@ const UserDataCollect = ({colorMode}) => {
                     onChange={handleChangeWork}
                     type="text"
                     placeholder="Enter Job Title"
-                    className="border rounded-md p-2 w-full"
+                     className="border rounded-md p-2 w-full text-black"
                 />
                 <textarea
                     id={`wDescription${i}`}
                     name="wDescription"
                     onChange={handleChangeWork}
                     placeholder="Use comma to separate Description"
-                    className="border rounded-md p-2 w-full my-2"
+                     className="border rounded-md p-2 w-full text-black"
                 />
             </div>
         );
@@ -214,7 +214,7 @@ const UserDataCollect = ({colorMode}) => {
                     name="awards"
                     onChange={handleChangeAwards}
                     placeholder="Your Awards are shown here"
-                    className="border rounded-md p-2 w-full my-2"
+                     className="border rounded-md p-2 w-full text-black"
                 />
             );
             setAwardData((prev) => ({ ...prev, awards: awardInput }));
@@ -232,47 +232,47 @@ const UserDataCollect = ({colorMode}) => {
             name="name"
             onChange={handleChangePersonal}
             placeholder="Your Name"
-            className="border rounded-md p-2 w-full"
+             className="border rounded-md p-2 w-full text-black"
           />
           <textarea
             name="summary"
             onChange={handleChangePersonal}
             placeholder="Your Summary"
-            className="border rounded-md p-2 w-full my-2"
+             className="border rounded-md p-2 w-full text-black"
           />
           <input
             type="file"
             name="profileImage"
             onChange={handleChangePersonal}
-            className="border rounded-md p-2 w-full my-2"
+             className="border rounded-md p-2 w-full text-black"
           />
           <input
             type="text"
             name="address"
             onChange={handleChangePersonal}
             placeholder="Address"
-            className="border rounded-md p-2 w-full"
+              className="border rounded-md p-2 w-full text-black"
           />
           <input
             type="text"
             name="phone"
             onChange={handleChangePersonal}
             placeholder="Phone"
-            className="border rounded-md p-2 w-full"
+              className="border rounded-md p-2 w-full text-black" 
           />
           <input
             type="email"
             name="email"
             onChange={handleChangePersonal}
             placeholder="Email"
-            className="border rounded-md p-2 w-full"
+              className="border rounded-md p-2 w-full text-black" 
           />
           <input
             type="text"
             name="skill"
             onChange={handleChangePersonal}
             placeholder="Your Skills"
-            className="border rounded-md p-2 w-full"
+             className="border rounded-md p-2 w-full text-black"
           />
         </div>
       
