@@ -1,19 +1,24 @@
 import { useContext } from 'react';
-// import { ImLocation } from 'react-icons/im';
-// import { GrMail } from 'react-icons/gr';
-// import { BsFillTelephoneFill } from 'react-icons/bs';
-// import PropTypes from 'prop-types'; 
+import PropTypes from 'prop-types'; 
 import ResumeContext from '../context/resumeCreate.jsx';
 
 const Theme2 = (props) => {
-  const { componentRef, themeData } = props;
-  const { name, address, phone, email, profile, profileImage, summary, skill } = themeData.personalData;
+  const { componentRef, themeData = {} } = props; // Provide a default empty object for themeData
+  const { personalData = {}, projectData = {}, workData = {}, awardData = {} } = themeData;
 
-  const { checkProj, checkWork, checkAward } = useContext(ResumeContext);
-  const { projectTitles, projectDesc } = themeData.projectData;
-  const { educationTitles, educationDesc } = themeData.educationData;
-  const { workTitles, workDesc } = themeData.workData;
-  const { awards } = themeData.awardData;
+  // Destructure personalData with default values to avoid errors if any of the fields are missing
+  const { name = '', address = '', phone = '', email = '', profile = '', profileImage = '', summary = '', skill = '' } = personalData;
+
+  const { checkProj, checkWork, checkAward,...data } = useContext(ResumeContext);
+
+  console.log(data);
+
+  const { educationData = [] } = data;
+
+  // Destructure projectData, educationData, workData, and awardData with default values
+  const { projectTitles = {}, projectDesc = {} } = projectData;
+  const { workTitles = {}, workDesc = {} } = workData;
+  const { awards = '' } = awardData;
 
   return (
     <div ref={componentRef} id="section-to-print">
@@ -60,14 +65,10 @@ const Theme2 = (props) => {
           <div className="w-full md:w-3/5">
             <div className="mb-6">
               <h3 className="text-2xl font-bold mb-2">Education</h3>
-              {Object.entries(educationTitles).map((element, index) => (
+              {educationData.map((element, index) => (
                 <div key={index} className="mt-4">
-                  <h4 className="text-lg font-semibold">{element[1]}</h4>
-                  <ul className="list-disc ml-6 text-sm">
-                    {Object.entries(educationDesc)[index]?.[1]?.split(',').map((descItem, descIndex) => (
-                      <li key={descIndex}>{descItem}</li>
-                    ))}
-                  </ul>
+                  <h4 className="text-lg font-semibold">{element.title}</h4>
+                  <p className="text-sm">{element.description}</p>
                 </div>
               ))}
             </div>

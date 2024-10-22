@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import UserDataCollect from '../components/userDetails/userData.jsx';
 import ResumeContext from '../context/resumeCreate.jsx';
-import PropagateLoader from "react-spinners/PropagateLoader";
+// import PropagateLoader from "react-spinners/PropagateLoader";
+import ErrorBoundary from './error.jsx';
 import { useNavigate } from 'react-router-dom';
 import ThemeTemplateData from '../collection/themes.jsx';
 import React from 'react';
@@ -35,9 +36,11 @@ const BuilderArea = (props) => {
 
                 {/* Template preview takes the other half */}
                 <div className="w-full md:w-1/2 p-4 border rounded-lg shadow-md">
+                <ErrorBoundary>
                     {selectedTemplate
                         ? React.cloneElement(selectedTemplate.themeComponent, { themeData })
                         : "No template selected"}
+                        </ErrorBoundary>
                 </div>
             </div>
 

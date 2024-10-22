@@ -6,13 +6,32 @@ import PropTypes from 'prop-types';
 import ResumeContext from '../context/resumeCreate.jsx';
 
 const Theme1 = ({ themeData}) => {
-    const { checkProj, checkWork, checkAward } = useContext(ResumeContext);
-    const { name, profile, address, phone, email, skill } = themeData.personalData;
-    const { projectTitles, projectDesc } = themeData.projectData;
-    const { educationTitles, educationDesc } = themeData.educationData;
-    const { workTitles, workDesc } = themeData.workData;
-    const { awards } = themeData.awardData;
-
+    const {
+        personalData: {
+            name = '',
+            profile = '',
+            address = '',
+            phone = '',
+            email = '',
+            skill = ''
+        } = {},
+        projectData: {
+            projectTitles = {},
+            projectDesc = []
+        } = {},
+        educationData: {
+            educationTitles = {},
+            educationDesc = []
+        } = {},
+        workData: {
+            workTitles = {},
+            workDesc = []
+        } = {},
+        awardData: {
+            awards = ''
+        } = {}
+    } = themeData || {};
+    
     return (
         <div id="section-to-print">
             {/* <div className="border border-gray-300 dark:border-white p-5 w-[90%] mx-auto" id="theme1"> */}

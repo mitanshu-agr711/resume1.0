@@ -1,5 +1,7 @@
-import { createContext } from "react";
+
+import  { createContext } from 'react';
 
 const ResumeContext = createContext();
 
-export default ResumeContext
+
+export default ResumeContext;
