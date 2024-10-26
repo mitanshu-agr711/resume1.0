@@ -1,15 +1,14 @@
-import React from "react";
 import { FaPhone, FaMapMarkerAlt, FaEnvelope, FaBriefcase } from "react-icons/fa";
-import PropTypes from 'prop-types';
 
-const Theme4 = ({ componentRef, themeData }) => {
+import { useContext } from 'react';
+import ResumeContext from '../context/resumeCreate.jsx';
+
+const Theme4 = ({ componentRef}) => {
   // Check if themeData is defined
-  if (!themeData) {
-      return <div>No data available</div>;
-  }
+  const { themeData, educationData = [], projectData = [], workData = [] } = useContext(ResumeContext);
 
-  const { personalData, educationData, workData, projectData } = themeData;
-  const { name, email, phone, address, summary = "Summary", skill = "", profile = "Work Profile" } = personalData;
+  // Destructure personal data properties
+  const { name, address, phone, email, profile, summary, skill } = themeData.personalData;
 
   return (
     <div ref={componentRef} className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 font-sans text-gray-800">
@@ -37,87 +36,62 @@ const Theme4 = ({ componentRef, themeData }) => {
         <h2 className="text-xl mb-2">Professional Summary</h2>
         <p className="text-lg mb-2">{summary}</p>
       </div>
-
+{/* =========================================================================================================== */}
       {/* Skills Section */}
       <div className="bg-blue-200 p-5 rounded-lg">
         <h2 className="text-xl mb-2">Skills</h2>
         <ul className="list-disc pl-5 mb-4 max-w-xs">
-          {skill.split(",").map((item, index) => (
-            <li key={index} className="text-lg mb-2">{item.trim()}</li>
-          ))}
+        {skill.split(',').map((item, index) => (
+                  <span key={index} className="inline-block text-sm px-2 py-1 rounded-full m-1">
+                    {item.trim()}
+                  </span>
+                ))}
         </ul>
-
+{/* =============================================================================================================================================== */}
         {/* Education Section */}
         <h2 className="text-xl mb-2">Education</h2>
-        {educationData?.educationTitles ? (
-          Object.entries(educationData.educationTitles).map(([key, title], index) => (
-            console.log("educationData", key),
-            <div key={index}>
-              <p className="font-bold">{title}</p>
-              <p>{educationData.educationDesc[`eDescription${index + 1}`] || "No Description"}</p>
-            </div>
-          ))
-        ) : (
-          <p>No education data available</p>
-        )}
+        <h3 className="text-2xl font-bold mb-2">Education</h3>
+              {educationData.map((element, index) => (
+                <div key={index} className="mt-4">
+                  <h4 className="text-lg font-semibold">{element.title}</h4>
+                  <p className="text-sm">{element.description}</p>
+                </div>
+              ))}
       </div>
-
+{/* =============================================================================================================================================== */}
       {/* Professional Experience and Projects Section */}
       <div className="bg-white p-5 rounded-lg col-span-1 md:col-span-2">
-        <h2 className="text-xl mb-2">Professional Experience</h2>
-        {workData?.workTitles ? (
-          Object.entries(workData.workTitles).map(([key, value], index) => (
-            <div key={index}>
-              <h3 className="text-lg font-bold mb-1">{value}</h3>
-              <ul className="list-disc pl-5 mb-4 max-w-xs">
-                {workData.workDesc[`wDescription${index + 1}`]?.split(",").map((desc, idx) => (
-                  <li key={idx} className="text-lg mb-2">{desc.trim()}</li>
-                )) || "No descriptions available."}
-              </ul>
-            </div>
-          ))
-        ) : (
-          <p>No work experience available</p>
-        )}
+      <h3 className="text-2xl font-bold mt-6">Work Experience</h3>
+              {workData.map((work, index) => (
+                <div key={index} className="mt-4">
+                  <h4 className="text-lg font-semibold">{work.title}</h4>
+                  <ul className="list-disc ml-6 text-sm">
+                    {(Array.isArray(work.description) ? work.description : work.description.split(',')).map((descItem, descIndex) => (
+                      <li key={descIndex}>{descItem.trim()}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+
+{/* ================================================================================================================================================================= */}
 
         {/* Projects Section */}
-        <h2 className="text-xl mb-2">Projects</h2>
-        {projectData?.projectTitles ? (
-          Object.entries(projectData.projectTitles).map(([key, value], index) => (
-            <div key={index}>
-              <h3 className="text-lg font-bold mb-1">{value}</h3>
-              <ul className="list-disc pl-5 mb-4 max-w-xs">
-                {projectData.projectDesc[`pDescription${index + 1}`]?.split(",").map((desc, idx) => (
-                  <li key={idx} className="text-lg mb-2">{desc.trim()}</li>
-                )) || "No descriptions available."}
-              </ul>
-            </div>
-          ))
-        ) : (
-          <p>No project data available</p>
-        )}
+        <h3 className="text-2xl font-bold mt-6">Projects</h3>
+              {projectData.map((project, index) => (
+                <div key={index} className="mt-4">
+                  <h4 className="text-lg font-semibold">{project.title}</h4>
+                  <ul className="list-disc ml-6 text-sm">
+                    {(Array.isArray(project.description) ? project.description : project.description.split(',')).map((descItem, descIndex) => (
+                      <li key={descIndex}>{descItem.trim()}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
       </div>
     </div>
   );
 };
+// ====================================================================================================================================================
 
-// Define prop types for the component
-Theme4.propTypes = {
-    componentRef: PropTypes.object,
-    themeData: PropTypes.shape({
-        personalData: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            email: PropTypes.string.isRequired,
-            phone: PropTypes.string.isRequired,
-            address: PropTypes.string.isRequired,
-            summary: PropTypes.string,
-            skill: PropTypes.string,
-            profile: PropTypes.string
-        }).isRequired,
-        educationData: PropTypes.object.isRequired,
-        workData: PropTypes.object.isRequired,
-        projectData: PropTypes.object.isRequired
-    }).isRequired
-};
 
 export default Theme4;

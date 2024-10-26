@@ -28,7 +28,7 @@ const UserDataCollect = ({ colorMode }) => {
         email: 'Email Address',
         skill: 'Your, Skills, are, shown, here',
     });
-    
+
     // Update themeData whenever substate changes
     useEffect(() => {
         setThemeData((prev) => ({
@@ -73,7 +73,7 @@ const UserDataCollect = ({ colorMode }) => {
             }
         }
     };
-// ===============================================================================================================================================
+    // ===============================================================================================================================================
     // Work data handler
     const handleChangeWork = (e) => {
         const { name, value } = e.target;
@@ -81,7 +81,11 @@ const UserDataCollect = ({ colorMode }) => {
 
         setWorkData((prev) => {
             const index = prev.findIndex((item) => item.id === id);
-            prev[index][name] = value;
+            if (name === 'description') {
+                prev[index][name] = value.split('\n'); // Split description into lines
+            } else {
+                prev[index][name] = value;
+            }
             return [...prev];
         });
     };
@@ -94,7 +98,7 @@ const UserDataCollect = ({ colorMode }) => {
             { title: '', description: '', id },
         ]);
     };
-// ==================================================================================================================================================
+    // ==================================================================================================================================================
     // Project data handler
     const handleChangeProject = (e) => {
         const { name, value } = e.target;
@@ -102,7 +106,11 @@ const UserDataCollect = ({ colorMode }) => {
 
         setProjectData((prev) => {
             const index = prev.findIndex((item) => item.id === id);
-            prev[index][name] = value;
+            if (name === 'description') {
+                prev[index][name] = value.split('\n'); // Split description into lines
+            } else {
+                prev[index][name] = value;
+            }
             return [...prev];
         });
     };
@@ -124,7 +132,11 @@ const UserDataCollect = ({ colorMode }) => {
 
         setEducationData((prev) => {
             const index = prev.findIndex((item) => item.id === id);
-            prev[index][name] = value;
+            if (name === 'description') {
+                prev[index][name] = value.split('\n'); // Split description into lines
+            } else {
+                prev[index][name] = value;
+            }
             return [...prev];
         });
     };
@@ -137,20 +149,20 @@ const UserDataCollect = ({ colorMode }) => {
             { title: '', description: '', id },
         ]);
     };
-// ===================================================================================================================================================
+    // ===================================================================================================================================================
     // Add award section
+    const handleChangeAwards = (e) => {
+        const { value } = e.target;
+        setAwardData(value.split('\n')); // Split lines into bullet points
+    };
+
     const handleAwardClick = (e) => {
         e.preventDefault();
         if (!checkAward) {
             setCheckAward(true);
         }
     };
-
-    const handleChangeAwards = (e) => {
-        const { name, value } = e.target;
-        setAwardData((prev) => ({ ...prev, [name]: value }));
-    };
-// ==============================================================================================================================================
+    // ==============================================================================================================================================
     return (
         <div className="min-w-1/3 mx-2 my-2">
             {/* Personal Details */}
@@ -224,10 +236,11 @@ const UserDataCollect = ({ colorMode }) => {
                             id={`project${index}`}
                             name="description"
                             onChange={(e) => handleChangeProject(e, project.id)}
-                            value={project.description || ''}
+                            value={project.description ? project.description.join('\n') : ''}
                             placeholder="Enter Project Description"
                             className="border rounded-md p-2 w-full text-black"
                         />
+        
                     </div>
                 ))}
                 <button
@@ -236,7 +249,7 @@ const UserDataCollect = ({ colorMode }) => {
                     Add Project
                 </button>
             </div>
- {/* =============================================================================================================================================            */}
+            {/* =============================================================================================================================================            */}
             {/* Education */}
             <div className="mb-2">
                 <h2 className="text-lg font-semibold">Education</h2>
@@ -255,7 +268,7 @@ const UserDataCollect = ({ colorMode }) => {
                             id={`education${index}`}
                             name="description"
                             onChange={handleChangeEducation}
-                            value={education.description || ''}
+                            value={education.description ? education.description.join('\n') : ''}
                             placeholder="Enter Education Description"
                             className="border rounded-md p-2 w-full text-black"
                         />
@@ -267,7 +280,7 @@ const UserDataCollect = ({ colorMode }) => {
                     Add Education
                 </button>
             </div>
-{/* ====================================================================================================================================================            */}
+            {/* ====================================================================================================================================================            */}
             {/* Work Experience */}
             <div className="mb-2">
                 <h2 className="text-lg font-semibold">Work Experience</h2>
@@ -285,8 +298,8 @@ const UserDataCollect = ({ colorMode }) => {
                         <textarea
                             id={`work${index}`}
                             name="description"
-                            onChange={(e) => handleChangeProject(e, work.id)}
-                            value={work.description || ''}
+                            onChange={(e) => handleChangeWork(e, work.id)}
+                            value={work.description ? work.description.join('\n') : ''}
                             placeholder="Enter Work Description"
                             className="border rounded-md p-2 w-full text-black"
                         />
@@ -298,27 +311,23 @@ const UserDataCollect = ({ colorMode }) => {
                     Add Work
                 </button>
             </div>
-{/* ================================================================================================================================================= */}
+            {/* ================================================================================================================================================= */}
 
             {/* Awards */}
-            {checkAward && (
-                <div className="mb-2">
-                    <h2 className="text-lg font-semibold">Awards</h2>
-                    <textarea
-                        name="award"
-                        onChange={handleChangeAwards}
-                        placeholder="Enter Award Description"
-                        className="border rounded-md p-2 w-full text-black"
-                    />
-                </div>
-            )}
-            {!checkAward && (
+            <div className="mb-2">
+                <h2 className="text-lg font-semibold">Award</h2>
+                <textarea
+                    onChange={handleChangeAwards}
+                    value={Array.isArray(award) ? award.join('\n') : ''} 
+                    placeholder="Enter award points, each on a new line"
+                    className="border rounded-md p-2 w-full text-black"
+                />
                 <button
                     onClick={handleAwardClick}
                     className="bg-blue-500 text-white p-2 rounded">
-                    Add Award
+                    Add Award Section
                 </button>
-            )}
+            </div>
         </div>
     );
 };

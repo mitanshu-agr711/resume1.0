@@ -1,17 +1,14 @@
-import React, { useContext } from "react";
+import  { useContext } from "react";
 import ResumeContext from '../context/resumeCreate.jsx';
 // import "./theme3.css";
 
-const Theme3 = (props) => {
-  const { componentRef, themeData } = props;
-  const { name, address, phone, email, profile, summary, skill } =
-    themeData.personalData;
+const Theme3 = ({ componentRef }) => {
+  const { themeData, educationData = [], workData = [], award=[] } = useContext(ResumeContext);
 
-  const { checkProj, checkWork, checkAward } = useContext(ResumeContext);
-  const { projectTitles, projectDesc } = themeData.projectData;
-  const { educationTitles, educationDesc } = themeData.educationData;
-  const { workTitles, workDesc } = themeData.workData;
-  const { awards } = themeData.awardData;
+  // Destructure personal data properties
+  const { name, address, phone, email, profile,  summary, skill } = themeData.personalData;
+  // console.log("descr  ",project.description)
+
 
   return (
     <div id="section-to-print" ref={componentRef}>
@@ -42,56 +39,44 @@ const Theme3 = (props) => {
               </div>
             </div>
 
-            {!checkWork && (
-              <>
+   {/* ====================================================================================================================         */}
                 <div className="border w-full my-2"></div>
                 <div className="flex w-full my-4">
                   <h3 className="text-md font-serif min-w-[175px]">Experience</h3>
                   <div className="ml-6 w-full">
-                    <p className="text-sm summary-text">
-                      {Object.entries(workTitles).map((element, index) => {
-                        return (
-                          <div key={index} className="mt-1">
-                            <h4 className="text-md font-serif my-2">{element[1]}</h4>
-                            {Object.entries(workDesc)[index] === undefined
-                              ? null
-                              : Object.entries(workDesc)[index][1].split(",").map((descItem, index) => {
-                                  return <p key={index}>{descItem}</p>;
-                                })}
-                          </div>
-                        );
-                      })}
-                    </p>
+                    {/* <p className="text-sm summary-text"> */}
+                    {workData.map((work, index) => (
+                <div key={index} >
+                  <h4 className="text-lg font-semibold">{work.title}</h4>
+                  <ul className="list-disc ml-6 text-sm">
+                    {(Array.isArray(work.description) ? work.description : work.description.split(',')).map((descItem, descIndex) => (
+                      <li key={descIndex}>{descItem.trim()}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+                    {/* </p> */}
                   </div>
                 </div>
-              </>
-            )}
-
+             
+{/* ============================================================================================================================================================= */}
             <div className="border w-full my-2"></div>
 
             <div className="flex w-full my-4">
               <h3 className="text-md font-serif min-w-[175px]">Education</h3>
               <div className="ml-6 w-full">
                 <p className="text-sm">
-                  {Object.entries(educationTitles).map((element, index) => {
-                    return (
-                      <div key={index} className="mb-4">
-                        <h4 className="text-md font-serif mb-2">{element[1]}</h4>
-                        {Object.entries(educationDesc)[index] === undefined
-                          ? null
-                          : Object.entries(educationDesc)[index][1].split(",").map((descItem, index) => {
-                              return <p key={index}>{descItem}</p>;
-                            })}
-                      </div>
-                    );
-                  })}
+                {educationData.map((element, index) => (
+                <div key={index}>
+                  <h4 className="text-lg font-semibold">{element.title}</h4>
+                  <p className="text-sm">{element.description}</p>
+                </div>
+              ))}
                 </p>
               </div>
             </div>
-
-            {!checkProj && (
-              <>
-                <div className="border w-full my-2"></div>
+{/* ============================================================================================================================== */}
+                {/* <div className="border w-full my-2"></div>
                 <div className="flex w-full my-4">
                   <h3 className="text-md font-serif min-w-[175px]">Projects</h3>
                   <div className="ml-6 w-full">
@@ -112,10 +97,9 @@ const Theme3 = (props) => {
                       })}
                     </p>
                   </div>
-                </div>
-              </>
-            )}
-
+                </div> */}
+             
+{/* ============================================================================================================================================= */}
             <div className="border w-full my-2"></div>
 
             <div className="flex w-full my-4">
@@ -134,26 +118,14 @@ const Theme3 = (props) => {
               </div>
             </div>
 
-            {!checkAward && (
-              <>
-                <div className="border w-full my-2"></div>
-                <div className="flex w-full my-4">
-                  <h3 className="text-md font-serif min-w-[175px]">Achievements</h3>
-                  <div className="ml-6 w-full">
-                    <div className="grid grid-cols-2 gap-5">
-                      {awards.split(",").map((item, index) => {
-                        return (
-                          <div key={index} className="flex items-center">
-                            <div className="bg-black w-1.5 h-1.5 rounded-full"></div>
-                            <p className="mx-1 text-gray-500 font-serif">{item}</p>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold mt-6">Awards & Achievements</h3>
+              <ul className="list-disc ml-6 text-sm">
+                {Array.isArray(award) && award.map((element, index) => (
+                  <li key={index}>{element}</li>
+                ))}
+              </ul>
+            </div>
           </section>
         </section>
       </div>

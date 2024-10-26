@@ -2,37 +2,15 @@ import { useContext } from 'react';
 import { ImLocation } from 'react-icons/im';
 import { GrMail } from 'react-icons/gr';
 import { BsFillTelephoneFill } from 'react-icons/bs';
-import PropTypes from 'prop-types'; 
+
 import ResumeContext from '../context/resumeCreate.jsx';
 
-const Theme1 = ({ themeData}) => {
-    const {
-        personalData: {
-            name = '',
-            profile = '',
-            address = '',
-            phone = '',
-            email = '',
-            skill = ''
-        } = {},
-        projectData: {
-            projectTitles = {},
-            projectDesc = []
-        } = {},
-        educationData: {
-            educationTitles = {},
-            educationDesc = []
-        } = {},
-        workData: {
-            workTitles = {},
-            workDesc = []
-        } = {},
-        awardData: {
-            awards = ''
-        } = {}
-    } = themeData || {};
+const Theme1 = ({ componentRef}) => {
+    const { themeData, educationData = [], projectData = [], workData = [], award = [] } = useContext(ResumeContext);
 
-    const{personalData=[],projectData=[],educationData=[],workData=[],awardData=[]}=ResumeContext();
+    // Destructure personal data properties
+    const { name, address, phone, email, profile, skill } = themeData.personalData;
+    // console.log("descr  ",project.description)
     
     return (
         <div id="section-to-print">
@@ -46,96 +24,89 @@ const Theme1 = ({ themeData}) => {
                     </p>
                     <h3 className='text-xl font-semibold mt-2 mb-4'>{profile}</h3>
                 </header>
-                
+{/* =====================================================================================================================================================================================          */}
                 {/* Skills Section */}
                 <section id="skills" className='my-4'>
-                    <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 text-center">TECHNICAL SKILLS</h3>
-                    <div id='skills-set' className='flex justify-center items-center my-2'>
+                    <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">TECHNICAL SKILLS</h3>
+                    <div id='skills-set' className='flex  my-2'>
                         <div className='flex flex-wrap gap-2'>
-                            {skill.split(',').map((element, index) => (
-                                <span key={index} className="bg-teal-200 text-black m-1 px-3 py-1 rounded">{element.trim()}</span>
-                            ))}
+                        {skill.split(',').map((item, index) => (
+                  <span key={index} className="inline-block bg-teal-200 text-teal-800 text-sm px-2 py-1 rounded-full m-1">
+                    {item.trim()}
+                  </span>
+                ))}
                         </div>
                     </div>
                 </section>
-
+{/* ======================================================================================================================================================================= */}
                 {/* Projects Section */}
-                {!checkProj && (
+              
                     <section id="projects" className='my-4'>
-                        <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 text-center">PROJECTS</h3>
+                        <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">PROJECTS</h3>
                         <div id='project-set' className='my-2'>
-                            {Object.entries(projectTitles).map(([key, title], index) => (
-                                <div key={index} className="mb-4">
-                                    <h4 className="text-lg font-semibold">{title}</h4>
-                                    <ul className="list-disc list-inside text-gray-700">
-                                        {projectDesc[index]?.split(',').map((desc, i) => (
-                                            <li key={i}>{desc.trim()}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            ))}
+                        {projectData.map((project, index) => (
+                <div key={index} className="mt-4">
+                  <h4 className="text-lg font-semibold">{project.title}</h4>
+                  <ul className="list-disc ml-6 text-sm">
+                    {(Array.isArray(project.description) ? project.description : project.description.split(',')).map((descItem, descIndex) => (
+                      <li key={descIndex}>{descItem.trim()}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
                         </div>
                     </section>
-                )}
-
+            
+{/* ================================================================================================================================================================================ */}
                 {/* Education Section */}
                 <section id="education" className='my-4'>
-                    <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 text-center">EDUCATION</h3>
+                    <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">EDUCATION</h3>
                     <div id='education-set' className='my-2'>
-                        {Object.entries(educationTitles).map(([key, title], index) => (
-                            <div key={index} className="mb-4">
-                                <h4 className="text-lg font-semibold">{title}</h4>
-                                <ul className="list-disc list-inside text-gray-700">
-                                    {educationDesc[index]?.split(',').map((desc, i) => (
-                                        <li key={i}>{desc.trim()}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
+                    {educationData.map((element, index) => (
+                <div key={index} className="mt-4">
+                  <h4 className="text-lg font-semibold">{element.title}</h4>
+                  <p className="text-sm">{element.description}</p>
+                </div>
+              ))}
                     </div>
                 </section>
-
+{/* ============================================================================================================================================================================================= */}
                 {/* Work Experience Section */}
-                {!checkWork && (
+                
                     <section id="experience" className='my-4'>
-                        <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 text-center">WORK EXPERIENCE</h3>
+                        <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">WORK EXPERIENCE</h3>
                         <div id='experience-set' className='my-2'>
-                            {Object.entries(workTitles).map(([key, title], index) => (
-                                <div key={index} className="mb-4">
-                                    <h4 className="text-lg font-semibold">{title}</h4>
-                                    <ul className="list-disc list-inside text-gray-700">
-                                        {workDesc[index]?.split(',').map((desc, i) => (
-                                            <li key={i}>{desc.trim()}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            ))}
+                        {workData.map((work, index) => (
+                <div key={index} className="mt-4">
+                  <h4 className="text-lg font-semibold">{work.title}</h4>
+                  <ul className="list-disc ml-6 text-sm">
+                    {(Array.isArray(work.description) ? work.description : work.description.split(',')).map((descItem, descIndex) => (
+                      <li key={descIndex}>{descItem.trim()}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
                         </div>
                     </section>
-                )}
-
+         
+{/* ====================================================================================================================================================================== */}
                 {/* Awards Section */}
-                {!checkAward && (
+              
                     <section id="awards" className='my-4'>
-                        <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 text-center">AWARDS & ACHIEVEMENTS</h3>
-                        <div id='award-set' className='flex justify-center items-center my-2'>
-                            <ul className="list-disc list-inside text-gray-700">
-                                {awards.split(',').map((element, index) => (
-                                    <li key={index}>{element.trim()}</li>
-                                ))}
-                            </ul>
+                        <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">AWARDS & ACHIEVEMENTS</h3>
+                        <div id='award-set' className='flex  my-2'>
+                        <ul className="list-disc ml-6 text-sm">
+                {Array.isArray(award) && award.map((element, index) => (
+                  <li key={index}>{element}</li>
+                ))}
+              </ul>
                         </div>
                     </section>
-                )}
+        
             {/* </div> */}
         </div>
     );
 };
 
-// Define prop types for the component
-Theme1.propTypes = {
-    themeData: PropTypes.object.isRequired,
-    componentRef: PropTypes.shape({ current: PropTypes.instanceOf(Element) }), // Reference to the printing component
-};
 
 export default Theme1;
