@@ -31,6 +31,8 @@ const Theme1 = ({ themeData}) => {
             awards = ''
         } = {}
     } = themeData || {};
+
+    const{personalData=[],projectData=[],educationData=[],workData=[],awardData=[]}=ResumeContext();
     
     return (
         <div id="section-to-print">
