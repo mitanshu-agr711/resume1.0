@@ -7,7 +7,7 @@ const Theme2 = ({ componentRef }) => {
 
   // Destructure personal data properties
   const { name, address, phone, email, profile, profileImage, summary, skill } = themeData.personalData;
-// console.log("descr  ",project.description)
+  // console.log("descr  ",project.description)
 
   return (
     <div ref={componentRef} id="section-to-print">
@@ -23,7 +23,7 @@ const Theme2 = ({ componentRef }) => {
           </div>
         </header>
         <div className="border-t border-black w-full"></div>
-{/* ================================================================================================================================================ */}
+        {/* ================================================================================================================================================ */}
         {/* Contact Section */}
         <div className="flex flex-col md:flex-row justify-between mt-6">
           <div className="w-full md:w-2/5">
@@ -38,7 +38,7 @@ const Theme2 = ({ componentRef }) => {
                 <p className="text-sm w-48">{address}</p>
               </div>
             </div>
-{/* ================================================================================================================================================ */}
+            {/* ================================================================================================================================================ */}
             {/* Skills Section */}
             <div className="mb-6">
               <h3 className="text-2xl font-bold mb-2">Skills</h3>
@@ -57,7 +57,7 @@ const Theme2 = ({ componentRef }) => {
           {/* Education, Projects, Work Experience, and Awards Sections */}
           <div className="w-full md:w-3/5">
 
-{/* ================================================================================================================================================= */}
+            {/* ================================================================================================================================================= */}
             {/* Education Section */}
             <div className="mb-6">
               <h3 className="text-2xl font-bold mb-2">Education</h3>
@@ -68,7 +68,7 @@ const Theme2 = ({ componentRef }) => {
                 </div>
               ))}
             </div>
-{/* ============================================================================================================================================== */}
+            {/* ============================================================================================================================================== */}
             {/* Projects Section */}
             <div className="mb-6">
               <h3 className="text-2xl font-bold mt-6">Projects</h3>
@@ -76,14 +76,14 @@ const Theme2 = ({ componentRef }) => {
                 <div key={index} className="mt-4">
                   <h4 className="text-lg font-semibold">{project.title}</h4>
                   <ul className="list-disc ml-6 text-sm">
-                    {project.description.split(',').map((descItem, descIndex) => (
+                    {(Array.isArray(project.description) ? project.description : project.description.split(',')).map((descItem, descIndex) => (
                       <li key={descIndex}>{descItem.trim()}</li>
                     ))}
                   </ul>
                 </div>
               ))}
             </div>
-{/* ================================================================================================================================================== */}
+            {/* ================================================================================================================================================== */}
             {/* Work Experience Section */}
             <div className="mb-6">
               <h3 className="text-2xl font-bold mt-6">Work Experience</h3>
@@ -91,19 +91,19 @@ const Theme2 = ({ componentRef }) => {
                 <div key={index} className="mt-4">
                   <h4 className="text-lg font-semibold">{work.title}</h4>
                   <ul className="list-disc ml-6 text-sm">
-                    {work.description.split(',').map((descItem, descIndex) => (
+                    {(Array.isArray(work.description) ? work.description : work.description.split(',')).map((descItem, descIndex) => (
                       <li key={descIndex}>{descItem.trim()}</li>
                     ))}
                   </ul>
                 </div>
               ))}
             </div>
-{/* =============================================================================================================================================== */}
+            {/* =============================================================================================================================================== */}
             {/* Awards Section */}
             <div className="mb-6">
               <h3 className="text-2xl font-bold mt-6">Awards & Achievements</h3>
               <ul className="list-disc ml-6 text-sm">
-                {award.map((element, index) => (
+                {Array.isArray(award) && award.map((element, index) => (
                   <li key={index}>{element}</li>
                 ))}
               </ul>
