@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 const ResumeState = (props) => {
   const componentRef = useRef();
   const [loading, setLoading] = useState(false);
-  
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
     onBeforePrint: () => {
@@ -71,6 +70,11 @@ const ResumeState = (props) => {
   const [currentTheme, setCurrentTheme] = useState("Theme1");
   const [selectBtn, setSelectBtn] = useState(true);
   const [selectedTemplateId, setSelectedTemplateId] = useState(null);
+  const [educationData, setEducationData] = useState([]);
+  const [projectData,setProjectData]=useState([]);
+  const [workData,setWorkData]=useState([]);
+  const [award,setAwardData]=useState([]);
+
 
   const contextValue = {
     initialData,
@@ -94,7 +98,15 @@ const ResumeState = (props) => {
     colorMode, 
     toggleColorMode, 
     selectedTemplateId, 
-    setSelectedTemplateId
+    setSelectedTemplateId,
+    educationData,
+    setEducationData,
+    projectData,
+    setProjectData,
+    workData,
+    setWorkData,
+    award,
+    setAwardData
   };
   return (
     <ResumeContext.Provider value={contextValue}>

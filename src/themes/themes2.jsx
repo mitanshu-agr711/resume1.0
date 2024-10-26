@@ -1,19 +1,13 @@
 import { useContext } from 'react';
-// import { ImLocation } from 'react-icons/im';
-// import { GrMail } from 'react-icons/gr';
-// import { BsFillTelephoneFill } from 'react-icons/bs';
-// import PropTypes from 'prop-types'; 
 import ResumeContext from '../context/resumeCreate.jsx';
 
-const Theme2 = (props) => {
-  const { componentRef, themeData } = props;
-  const { name, address, phone, email, profile, profileImage, summary, skill } = themeData.personalData;
+const Theme2 = ({ componentRef }) => {
+  // Access all data from ResumeContext
+  const { themeData, educationData = [], projectData = [], workData = [], award = [] } = useContext(ResumeContext);
 
-  const { checkProj, checkWork, checkAward } = useContext(ResumeContext);
-  const { projectTitles, projectDesc } = themeData.projectData;
-  const { educationTitles, educationDesc } = themeData.educationData;
-  const { workTitles, workDesc } = themeData.workData;
-  const { awards } = themeData.awardData;
+  // Destructure personal data properties
+  const { name, address, phone, email, profile, profileImage, summary, skill } = themeData.personalData;
+// console.log("descr  ",project.description)
 
   return (
     <div ref={componentRef} id="section-to-print">
@@ -29,6 +23,8 @@ const Theme2 = (props) => {
           </div>
         </header>
         <div className="border-t border-black w-full"></div>
+{/* ================================================================================================================================================ */}
+        {/* Contact Section */}
         <div className="flex flex-col md:flex-row justify-between mt-6">
           <div className="w-full md:w-2/5">
             <div className="mb-6">
@@ -42,13 +38,14 @@ const Theme2 = (props) => {
                 <p className="text-sm w-48">{address}</p>
               </div>
             </div>
-
+{/* ================================================================================================================================================ */}
+            {/* Skills Section */}
             <div className="mb-6">
               <h3 className="text-2xl font-bold mb-2">Skills</h3>
               <div className="flex flex-wrap">
                 {skill.split(',').map((item, index) => (
                   <span key={index} className="inline-block bg-teal-200 text-teal-800 text-sm px-2 py-1 rounded-full m-1">
-                    {item}
+                    {item.trim()}
                   </span>
                 ))}
               </div>
@@ -57,63 +54,60 @@ const Theme2 = (props) => {
 
           <div className="hidden md:block border-l border-black mx-4"></div>
 
+          {/* Education, Projects, Work Experience, and Awards Sections */}
           <div className="w-full md:w-3/5">
+
+{/* ================================================================================================================================================= */}
+            {/* Education Section */}
             <div className="mb-6">
               <h3 className="text-2xl font-bold mb-2">Education</h3>
-              {Object.entries(educationTitles).map((element, index) => (
+              {educationData.map((element, index) => (
                 <div key={index} className="mt-4">
-                  <h4 className="text-lg font-semibold">{element[1]}</h4>
+                  <h4 className="text-lg font-semibold">{element.title}</h4>
+                  <p className="text-sm">{element.description}</p>
+                </div>
+              ))}
+            </div>
+{/* ============================================================================================================================================== */}
+            {/* Projects Section */}
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold mt-6">Projects</h3>
+              {projectData.map((project, index) => (
+                <div key={index} className="mt-4">
+                  <h4 className="text-lg font-semibold">{project.title}</h4>
                   <ul className="list-disc ml-6 text-sm">
-                    {Object.entries(educationDesc)[index]?.[1]?.split(',').map((descItem, descIndex) => (
-                      <li key={descIndex}>{descItem}</li>
+                    {project.description.split(',').map((descItem, descIndex) => (
+                      <li key={descIndex}>{descItem.trim()}</li>
                     ))}
                   </ul>
                 </div>
               ))}
             </div>
-
-            {!checkProj && (
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold mt-6">Projects</h3>
-                {Object.entries(projectTitles).map((element, index) => (
-                  <div key={index} className="mt-4">
-                    <h4 className="text-lg font-semibold">{element[1]}</h4>
-                    <ul className="list-disc ml-6 text-sm">
-                      {Object.entries(projectDesc)[index]?.[1]?.split(',').map((descItem, descIndex) => (
-                        <li key={descIndex}>{descItem}</li>
-                      ))}
-                    </ul>
-                  </div>
+{/* ================================================================================================================================================== */}
+            {/* Work Experience Section */}
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold mt-6">Work Experience</h3>
+              {workData.map((work, index) => (
+                <div key={index} className="mt-4">
+                  <h4 className="text-lg font-semibold">{work.title}</h4>
+                  <ul className="list-disc ml-6 text-sm">
+                    {work.description.split(',').map((descItem, descIndex) => (
+                      <li key={descIndex}>{descItem.trim()}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+{/* =============================================================================================================================================== */}
+            {/* Awards Section */}
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold mt-6">Awards & Achievements</h3>
+              <ul className="list-disc ml-6 text-sm">
+                {award.map((element, index) => (
+                  <li key={index}>{element}</li>
                 ))}
-              </div>
-            )}
-
-            {!checkWork && (
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold mt-6">Work Experience</h3>
-                {Object.entries(workTitles).map((element, index) => (
-                  <div key={index} className="mt-4">
-                    <h4 className="text-lg font-semibold">{element[1]}</h4>
-                    <ul className="list-disc ml-6 text-sm">
-                      {Object.entries(workDesc)[index]?.[1]?.split(',').map((descItem, descIndex) => (
-                        <li key={descIndex}>{descItem}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {!checkAward && (
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold mt-6">Awards & Achievements</h3>
-                <ul className="list-disc ml-6 text-sm">
-                  {awards.split(',').map((element, index) => (
-                    <li key={index}>{element}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
