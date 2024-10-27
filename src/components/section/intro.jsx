@@ -48,7 +48,7 @@ export default function Introduction({ colorMode }) {
                     </div>
                     <Link to="/templates"> <button
                         onClick={handleSelectTemplate}
-                        className="bg-teal-500 text-white py-2 px-6 rounded-full m-2 hover:bg-teal-600 transition"
+                        className="bg-teal-500 text-white py-2 px-6 rounded-full m-2 hover:bg-teal-600 transition mb-7"
                     >
                         Select Template
                     </button></Link>

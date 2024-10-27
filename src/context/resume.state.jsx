@@ -2,19 +2,31 @@ import ResumeContext from "./resumeCreate.jsx";
 import { useState, useRef,useEffect } from "react";
 import { useReactToPrint } from "react-to-print";
 import PropTypes from "prop-types";
+
+
 const ResumeState = (props) => {
-  const componentRef = useRef();
+
   const [loading, setLoading] = useState(false);
+
+  // ============================================================================================================================================================
+
+  const componentRef = useRef();
   const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
+    content: () => {
+      console.log(componentRef.current);
+      return componentRef.current;
+    },
+
     onBeforePrint: () => {
       setLoading(true);
     },
     onAfterPrint: () => {
+      // console.log("printuihfiuhfr");
       setLoading(false);
     },
+    
   });
-
+// ====================================================================================================================================================
   const [colorMode, setColorMode] = useState(() => {
     return localStorage.getItem('colorMode') || 'light'; // Load from localStorage
   });
@@ -77,6 +89,8 @@ const ResumeState = (props) => {
 
 
   const contextValue = {
+    loading,
+    setLoading,
     initialData,
     selectBtn,
     setSelectBtn,
@@ -88,7 +102,6 @@ const ResumeState = (props) => {
     setCurrentTheme,
     showComponent,
     setShowComponent,
-    loading,
     themeData,
     setThemeData,
     checkProj,
