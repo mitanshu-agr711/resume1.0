@@ -1,4 +1,4 @@
-import { useContext, useRef, useEffect } from 'react';
+import { useContext, useRef } from 'react';
 import UserDataCollect from '../components/userDetails/userData.jsx';
 import ResumeContext from '../context/resumeCreate.jsx';
 import ErrorBoundary from './error.jsx';
@@ -10,19 +10,15 @@ import { useReactToPrint } from 'react-to-print';
 
 const BuilderArea = (props) => {
     const { selectedTemplateId, themeData } = useContext(ResumeContext);
-    const componentRef = useRef(null);
+    const componentRef = useRef();
 
-
-    useEffect(() => {
-        console.log("ComponentRef on mount:", componentRef.current);
-    }, [componentRef]);
     const handlePrint = useReactToPrint({
         content: () => {
-            console.log("ComponentRef Current:", componentRef.current);
+            console.log("ComponentRef Current:", componentRef.current); 
             return componentRef.current;
         },
-        onBeforeGetContent: () => console.log("Preparing to print..."),
-        onAfterPrint: () => console.log("Print completed"),
+        onBeforeGetContent: () => console.log("Preparing to print..."), 
+        onAfterPrint: () => console.log("Print completed"), 
     });
 
     const navigate = useNavigate();
@@ -46,20 +42,16 @@ const BuilderArea = (props) => {
                 <div className="w-full md:w-1/2 p-4 border rounded-lg shadow-md" ref={componentRef}>
                     <ErrorBoundary>
                         {selectedTemplate
-                            ? React.cloneElement(selectedTemplate.themeComponent, { themeData, componentRef })
+                            ? React.cloneElement(selectedTemplate.themeComponent, { themeData })
                             : "No template selected"}
                     </ErrorBoundary>
-
                 </div>
             </div>
 
             <div className="flex flex-wrap justify-center mt-5">
                 <button
                     className="mx-2 px-4 py-2 border border-teal-500 text-teal-500 rounded hover:bg-teal-500 hover:text-white mb-7"
-                    onClick={() => {
-                        console.log("Print button clicked"); // Check if this logs
-                        handlePrint();
-                    }}
+                    onClick={handlePrint}
                 >
                     Print
                 </button>
