@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import ResumeContext from '../context/resumeCreate.jsx';
+import {ResumeContext} from '../context/resumeCreate.jsx';
 import ThemeTemplateData from '../collection/themes.jsx';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/footer/footer.jsx';

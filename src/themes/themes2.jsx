@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import ResumeContext from '../context/resumeCreate.jsx';
+import {ResumeContext }from '../context/resumeCreate.jsx';
 
 const Theme2 = ({componentRef}) => {
   // Access all data from ResumeContext

@@ -2,7 +2,7 @@
 import homeLogo from '/assets/homei.avif';
 import { useContext } from 'react';
 import Footer from '../footer/footer.jsx';
-import ResumeContext from '../../context/resumeCreate.jsx';
+import {ResumeContext }from '../../context/resumeCreate.jsx';
 
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';

@@ -1,5 +1,5 @@
 import  { useContext } from "react";
-import ResumeContext from '../context/resumeCreate.jsx';
+import {ResumeContext} from '../context/resumeCreate.jsx';
 // import "./theme3.css";
 
 const Theme3 = ({ componentRef }) => {
