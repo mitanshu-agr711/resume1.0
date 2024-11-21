@@ -8,3 +8,10 @@ body.dark-mode {
     color: white;
   }
   
+@media print {
+   
+    body {
+      background-color: white;
+      color: black;
+    }
+  }

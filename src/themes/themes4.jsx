@@ -1,7 +1,7 @@
 import { FaPhone, FaMapMarkerAlt, FaEnvelope, FaBriefcase } from "react-icons/fa";
 
 import { useContext } from 'react';
-import ResumeContext from '../context/resumeCreate.jsx';
+import {ResumeContext} from '../context/resumeCreate.jsx';
 
 const Theme4 = ({ componentRef}) => {
   // Check if themeData is defined

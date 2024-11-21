@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import ResumeContext from '../../context/resumeCreate.jsx';
+import {ResumeContext} from '../../context/resumeCreate.jsx';
 
 const UserDataCollect = ({ colorMode }) => {
     const {

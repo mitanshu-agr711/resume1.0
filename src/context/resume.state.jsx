@@ -1,12 +1,16 @@
-import ResumeContext from "./resumeCreate.jsx";
+import {ResumeContext} from "./resumeCreate.jsx";
 import { useState, useRef,useEffect } from "react";
 import { useReactToPrint } from "react-to-print";
 import PropTypes from "prop-types";
 const ResumeState = (props) => {
   const componentRef = useRef();
+
   const [loading, setLoading] = useState(false);
+
+  console.log("componentRef", componentRef);
+
   const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
+    contentRef: componentRef,
     onBeforePrint: () => {
       setLoading(true);
     },

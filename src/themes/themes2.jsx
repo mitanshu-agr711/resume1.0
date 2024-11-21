@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import ResumeContext from '../context/resumeCreate.jsx';
+import {ResumeContext }from '../context/resumeCreate.jsx';
 
-const Theme2 = ({ componentRef }) => {
+const Theme2 = ({componentRef}) => {
   // Access all data from ResumeContext
-  const { themeData, educationData = [], projectData = [], workData = [], award = [] } = useContext(ResumeContext);
+  const { themeData, educationData = [], projectData = [], workData = [], award = []} = useContext(ResumeContext);
 
   // Destructure personal data properties
   const { name, address, phone, email, profile, profileImage, summary, skill } = themeData.personalData;
