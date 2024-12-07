@@ -67,10 +67,10 @@ const ResumeState = (props) => {
 
 
   const [themeData, setThemeData] = useState(initialData);
-  const [checkProj, setCheckProj] = useState(false);
-  const [checkWork, setCheckWork] = useState(false);
-  const [checkAward, setCheckAward] = useState(false);
-  const [showComponent, setShowComponent] = useState(false);
+  // const [checkProj, setCheckProj] = useState(false);
+  // const [checkWork, setCheckWork] = useState(false);
+  // const [checkAward, setCheckAward] = useState(false);
+  // const [showComponent, setShowComponent] = useState(false);
   const [currentTheme, setCurrentTheme] = useState("Theme1");
   const [selectBtn, setSelectBtn] = useState(true);
   const [selectedTemplateId, setSelectedTemplateId] = useState(null);
@@ -84,21 +84,21 @@ const ResumeState = (props) => {
     initialData,
     selectBtn,
     setSelectBtn,
-    checkAward,
-    setCheckAward,
+    // checkAward,
+    // setCheckAward,
     componentRef,
     handlePrint,
     currentTheme,
     setCurrentTheme,
-    showComponent,
-    setShowComponent,
+    // showComponent,
+    // setShowComponent,
     loading,
     themeData,
     setThemeData,
-    checkProj,
-    checkWork,
-    setCheckProj,
-    setCheckWork,
+    // checkProj,
+    // checkWork,
+    // setCheckProj,
+    // setCheckWork,
     colorMode, 
     toggleColorMode, 
     selectedTemplateId, 
