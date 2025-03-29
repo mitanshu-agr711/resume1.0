@@ -7,7 +7,7 @@ This is a **React** project bootstrapped with [Vite](https://vitejs.dev/), using
 ### Clone the Repository
 
 ```bash
-git clone [<your-repository-url>](https://github.com/mitanshu-agr711/resume1.0)
+git clone https://github.com/mitanshu-agr711/resume1.0
 cd <your-project-folder>
 ```
 
