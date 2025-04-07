@@ -8,6 +8,7 @@ import Intro from './components/section/intro.jsx';
 import './index.css';
 import Template from './themes/templates.jsx';
 import Build from './pages/buildarea.jsx';
+import AutoFill from './themes/AutoFill.jsx';
 
 function App() {
   const [colorMode, setColorMode] = useState('light');
@@ -37,6 +38,7 @@ function App() {
           <Route exact path="/about" element={<About colorMode={colorMode} />} />
           <Route path="/templates" element={<Template />} />
           <Route path="/build" element={<Build />} />
+          <Route path="/autofill" element={<AutoFill />} />
         </Routes>
       </div>
     </ResumeState>

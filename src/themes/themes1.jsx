@@ -1,4 +1,4 @@
-;
+
 
 import { useContext } from 'react';
 import { ImLocation } from 'react-icons/im';

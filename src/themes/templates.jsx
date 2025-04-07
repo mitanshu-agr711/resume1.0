@@ -10,7 +10,7 @@ const Template = () => {
 
   const handleSelectTemplate = (id) => {
     setSelectedTemplateId(id);
-    navigate('/build');
+    navigate('/autofill');
   };
 
   return (
