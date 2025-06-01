@@ -42,15 +42,16 @@ function App() {
               ease: "easeInOut",
             }}
             className="relative flex flex-col gap-4 items-center justify-center px-4"
-          > 
-           <Navbar toggleColorMode={toggleColorMode} colorMode={colorMode} />
+          >
+            <Navbar toggleColorMode={toggleColorMode} colorMode={colorMode} />
             <Routes>
               <Route exact path="/" element={<Intro colorMode={colorMode} />} />
               <Route exact path="/about" element={<About colorMode={colorMode} />} />
-              <Route path="/templates" element={<Template />} />
-              <Route path="/build" element={<Build />} />
-              <Route path="/autofill" element={<AutoFill />} />
+              <Route path="/templates" element={<Template colorMode={colorMode} />} />
+              <Route path="/build" element={<Build colorMode={colorMode} />} />
+              <Route path="/autofill" element={<AutoFill colorMode={colorMode} />} />
             </Routes>
+
           </motion.div>
         </AuroraBackground>
       </div>

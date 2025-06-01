@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import {ResumeContext} from '../context/resumeCreate.jsx';
+import { ResumeContext } from '../context/resumeCreate.jsx';
 import ThemeTemplateData from '../collection/themes.jsx';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/footer/footer.jsx';
@@ -16,12 +16,12 @@ const Template = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center space-y-4 min-h-screen pb-24">
+      <div className="flex flex-col items-center space-y-4 min-h-screen pt-28 md:pt-32 pb-40 md:pb-28  ">
         <h1 className="font-bold text-3xl md:text-6xl leading-tight my-4">
           Select a <span className="text-teal-500">Template</span> from the list
         </h1>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-lg md:max-w-2xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full md:w-9/12 ">
           {ThemeTemplateData.map((item, index) => (
             <div
               key={index}
@@ -32,11 +32,13 @@ const Template = () => {
                 id={item.id}
                 src={item.imageSrc}
                 alt={item.imageAlt}
-                className="w-full h-auto rounded shadow-md"
+                className="w-full h-80 md:h-96 rounded-2xl shadow-2xl "
               />
             </div>
           ))}
         </div>
+
+
       </div>
       <Footer />
     </>

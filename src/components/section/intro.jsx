@@ -66,7 +66,7 @@ export default function Introduction({ colorMode }) {
 
                     </div>
                     <Link to="/templates">
-                    <div className="m-10">
+                    <div className="m-10 pt-28 md:pt-32">
                         <Button
                             onClick={handleSelectTemplate}
                             className=" py-2 px-6 rounded-full bg-white text-black  font-bold hover:bg-gray-200 transition-colors duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
