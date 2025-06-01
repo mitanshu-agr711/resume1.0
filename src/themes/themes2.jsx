@@ -19,7 +19,7 @@ const Theme2 = ({ componentRef }) => {
   const profileImageSrc = profileImage?.src || 'https://via.placeholder.com/150';
 
   return (
-    <div ref={componentRef} id="section-to-print">
+    <div ref={componentRef} id="section-to-print" className="pt-28 md:pt-32 pb-40 md:pb-28">
       <div id="theme2" className="p-12">
         <header className="flex justify-between items-center text-center my-4">
           <div className="info-text text-left">

@@ -32,7 +32,7 @@ const Theme1 = () => {
 
   return (
     <>
-      <div id="section-to-print" ref={componentRef}>
+      <div id="section-to-print" ref={componentRef} className="pt-28 md:pt-32 pb-40 md:pb-28">
         <header id='info' className='text-center mt-4'>
           <h2 className='text-4xl font-bold mb-4'>{name}</h2>
           <p className='text-md text-gray-600 mb-4'>

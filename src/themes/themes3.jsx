@@ -11,7 +11,7 @@ const Theme3 = ({ componentRef }) => {
 
 
   return (
-    <div id="section-to-print" ref={componentRef}>
+    <div id="section-to-print" ref={componentRef} className="pt-28 md:pt-32 pb-40 md:pb-28">
       <div id="theme3" className="p-10 px-20">
         <header
           id="info"

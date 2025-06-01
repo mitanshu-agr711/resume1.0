@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ResumeContext } from "../../context/resumeCreate.jsx";
 import PropTypes from "prop-types";
 
-const UserDataCollect = () => {
+const UserDataCollect = ({ colorMode }) => {
   const {
     checkAward,
     setCheckAward,
@@ -168,7 +168,7 @@ const UserDataCollect = () => {
   };
   // ==============================================================================================================================================
   return (
-    <div className="min-w-1/3 mx-2 my-2">
+    <div className={`min-w-1/3 mx-2 my-2 pt-28 md:pt-32 pb-40 md:pb-28 ${colorMode === 'light' ? 'text-black' : 'text-white'} space-y-9`}>
       {/* Personal Details */}
       <div className="mb-2">
         <h2 className="text-lg font-semibold">Personal Data</h2>

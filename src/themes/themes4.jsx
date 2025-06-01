@@ -10,7 +10,7 @@ const Theme4 = ({ componentRef }) => {
   const { name, address, phone, email, profile, summary, skill } = themeData?.personal_info || {};
 
   return (
-    <div ref={componentRef} className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 font-sans text-gray-800">
+    <div ref={componentRef} className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 font-sans text-gray-800 pt-28 md:pt-32 pb-40 md:pb-28">
       <div className="bg-sky-400 p-5 rounded-lg">
         <h1 className="text-4xl font-bold mb-2">{name}</h1>
         <p className="flex items-center mb-2 max-w-xs">
