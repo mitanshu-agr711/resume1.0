@@ -6,7 +6,7 @@ const Theme2 = ({ componentRef }) => {
     themeData,
     educationData = [],
     projectData = [],
-      work_experience = [],
+    work_experience = [],
     award = [],
   } = useContext(ResumeContext);
 
@@ -93,29 +93,33 @@ const Theme2 = ({ componentRef }) => {
                     {(Array.isArray(project.description)
                       ? project.description
                       : (project.description || '').split(',')).map((descItem, descIndex) => (
-                      <li key={descIndex}>{descItem.trim()}</li>
-                    ))}
+                        <li key={descIndex}>{descItem.trim()}</li>
+                      ))}
                   </ul>
                 </div>
               ))}
             </div>
 
             {/* Work Experience */}
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold mt-6">Work Experience</h3>
-              {  work_experience.map((work, index) => (
-                <div key={index} className="mt-4">
-                  <h4 className="text-lg font-semibold">{work.title}</h4>
-                  <ul className="list-disc ml-6 text-sm">
-                    {(Array.isArray(work.description)
-                      ? work.description
-                      : (work.description || '').split(',')).map((descItem, descIndex) => (
-                      <li key={descIndex}>{descItem.trim()}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
+            <section id="experience" className='my-4'>
+              <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">WORK EXPERIENCE</h3>
+              <div id='experience-set' className='my-2'>
+                {Array.isArray(work_experience) && work_experience.length > 0 ? (
+                  work_experience.map((work, index) => (
+                    <div key={work.id} className="mt-4">
+                      <h4 className="text-lg font-semibold">{work.company || 'Company Name'}</h4>
+                      <ul className="list-disc ml-6 text-sm">
+                        {(Array.isArray(work.responsibilities) ? work.responsibilities : (work.responsibilities || '').split(',')).map((descItem, descIndex) => (
+                          <li key={descIndex}>{descItem.trim()}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-sm text-gray-600 mt-2 ml-4">No work experience available.</p>
+                )}
+              </div>
+            </section>
 
             {/* Awards */}
             <div className="mb-6">

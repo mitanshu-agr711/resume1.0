@@ -29,7 +29,7 @@ const BuilderArea = () => {
   return (
     <>
   
-  <div className={`flex flex-col md:flex-row justify-between mt-4 mx-2 space-y-4 md:space-y-0 pb-24 transition-all duration-200 ${!selectedTemplate ? 'blur-sm pointer-events-none select-none' : ''}`}>
+  <div className={`pt-28 md:pt-32  md:pb-28  flex flex-col md:flex-row justify-between mt-4 mx-2 space-y-4 md:space-y-0 pb-24 transition-all duration-200 ${!selectedTemplate ? 'blur-sm pointer-events-none select-none' : ''}`}>
     <div className="w-full md:w-1/2 p-2 shadow-md">
       <ErrorBoundary>
         <UserDataCollect />

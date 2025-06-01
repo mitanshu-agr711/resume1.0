@@ -2,11 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { ResumeContext } from "../../context/resumeCreate.jsx";
 import PropTypes from "prop-types";
 
-const UserDataCollect = ({ colorMode }) => {
+const UserDataCollect = () => {
   const {
     checkAward,
     setCheckAward,
-    // setThemeData,
     educationData,
     setEducationData,
     projectData,
@@ -16,7 +15,7 @@ const UserDataCollect = ({ colorMode }) => {
     award,
     setAwardData,
     themeData,
-  } = useContext(ResumeContext);
+  } = useContext(ResumeContext) || {};
 
   const [personal_info, setpersonal_info] = useState({
     profileImage: "https://www.w3schools.com/howto/img_avatar.png",
@@ -29,18 +28,6 @@ const UserDataCollect = ({ colorMode }) => {
     skill: "Your, Skills, are, shown, here",
   });
 
-  // Update themeData whenever substate changes
-
-  // useEffect(() => {
-  //     setThemeData((prev) => ({
-  //         ...prev,
-  //         personal_info,
-  //         projectData,
-  //         educationData,
-  //         work_experience,
-  //         award,
-  //     }));
-  // }, [personal_info, projectData, educationData, award, work_experience]);
 
   useEffect(() => {
     if (themeData) {
@@ -48,11 +35,11 @@ const UserDataCollect = ({ colorMode }) => {
       setProjectData(themeData.projectData || []);
       setEducationData(themeData.educationData || []);
       setAwardData(themeData.award || []);
-      setwork_experience(themeData.work_experience || []);
+      setwork_experience(Array.isArray(themeData.work_experience) ? themeData.work_experience : []);
     }
   }, [themeData]);
 
- 
+
 
   // Personal data handler
   const handleChangePersonal = (e) => {
@@ -73,28 +60,30 @@ const UserDataCollect = ({ colorMode }) => {
   const handleChangeWork = (e) => {
     const { name, value, id } = e.target;
     setwork_experience((prev) => {
-        if (!Array.isArray(prev)) return [];
-        const newArr = [...prev];
-        const index = newArr.findIndex((item) => item.id === id);
-        if (index !== -1) {
-          if (name === "description") {
-            newArr[index][name] = value.split("\n");
-          } else {
-            newArr[index][name] = value;
-          }
+      if (!Array.isArray(prev)) return [];
+      const newArr = [...prev];
+      const index = newArr.findIndex((item) => item.id === id);
+      if (index !== -1) {
+        if (name === "responsibilities") {
+          newArr[index][name] = value ? value.split("\n") : [];
+        } else {
+          newArr[index][name] = value || "";
         }
-        return newArr;
+      }
+      return newArr;
     });
   };
 
+
   const handleWorkClick = (e) => {
-    e.preventDefault();
-    const id = `work${work_experience.length}`;
-    setwork_experience((prev) => [
-      ...(Array.isArray(prev) ? prev : []),
-      { company: "", responsibilities: [], id },
-    ]);
-  };
+  e.preventDefault();
+  const id = `work${work_experience.length}`;
+  setwork_experience((prev) => [
+    ...(Array.isArray(prev) ? prev : []),
+    { company: "", responsibilities: [], id }
+  ]);
+};
+
   // ==================================================================================================================================================
   // Project data handler
   const handleChangeProject = (e) => {
@@ -104,11 +93,12 @@ const UserDataCollect = ({ colorMode }) => {
       const index = prev.findIndex((item) => item.id === id);
       if (index !== -1) {
         if (name === "description") {
-          prev[index].description = value.split("\n");
+          // FIX: Add null/undefined check before split
+          prev[index].description = value ? value.split("\n") : [];
         } else if (name === "title") {
-          prev[index].title = value;
+          prev[index].title = value || "";
         } else {
-          prev[index][name] = value;
+          prev[index][name] = value || "";
         }
       }
       return [...prev];
@@ -133,17 +123,18 @@ const UserDataCollect = ({ colorMode }) => {
       const index = newArr.findIndex((item) => item.id === id);
       if (index !== -1) {
         if (name === "description") {
-          newArr[index].description = value.split("\n");
+          // FIX: Add null/undefined check before split
+          newArr[index].description = value ? value.split("\n") : [];
         } else if (name === "title") {
-          newArr[index].degree = value; 
+          newArr[index].degree = value || "";
         } else {
-          newArr[index][name] = value;
+          newArr[index][name] = value || "";
         }
       }
-      return newArr; 
+      return newArr;
     });
   };
-  
+
   const handleEducationClick = (e) => {
     e.preventDefault();
     const id = `education${educationData.length}`;
@@ -152,35 +143,33 @@ const UserDataCollect = ({ colorMode }) => {
       { degree: "", description: [], id },
     ]);
   };
-  
+
   // ===================================================================================================================================================
   // Add award section
   const handleChangeAwards = (e) => {
     const { value } = e.target;
-    setAwardData(value.split("\n"));
+    // FIX: Add null/undefined check before split
+    setAwardData(value ? value.split("\n") : []);
   };
 
-  const handleAwardClick = (e) => {
-    e.preventDefault();
-    if (!checkAward) {
-      setCheckAward(true);
-    }
-  };
+  ;
   // ==============================================================================================================================================
   return (
-    <div className={`min-w-1/3 mx-2 my-2 pt-28 md:pt-32 pb-40 md:pb-28 ${colorMode === 'light' ? 'text-black' : 'text-white'} space-y-9`}>
+    <div className="min-w-1/3 mx-2 my-2 bg-white p-4 rounded-lg shadow-lg dark:bg-gray-800 space-y-5">
       {/* Personal Details */}
-      <div className="mb-2">
+      <div className="mb-2 space-y-4">
         <h2 className="text-lg font-semibold">Personal Data</h2>
         <input
           type="text"
           name="name"
+          value={personal_info.name || ""}
           onChange={handleChangePersonal}
           placeholder="Your Name"
           className="border rounded-md p-2 w-full text-black"
         />
         <textarea
           name="summary"
+          value={personal_info.summary || ""}
           onChange={handleChangePersonal}
           placeholder="Your Summary"
           className="border rounded-md p-2 w-full text-black"
@@ -194,6 +183,7 @@ const UserDataCollect = ({ colorMode }) => {
         <input
           type="text"
           name="address"
+          value={personal_info.address || ""}
           onChange={handleChangePersonal}
           placeholder="Address"
           className="border rounded-md p-2 w-full text-black"
@@ -201,6 +191,7 @@ const UserDataCollect = ({ colorMode }) => {
         <input
           type="text"
           name="phone"
+          value={personal_info.phone || ""}
           onChange={handleChangePersonal}
           placeholder="Phone"
           className="border rounded-md p-2 w-full text-black"
@@ -208,6 +199,7 @@ const UserDataCollect = ({ colorMode }) => {
         <input
           type="email"
           name="email"
+          value={personal_info.email || ""}
           onChange={handleChangePersonal}
           placeholder="Email"
           className="border rounded-md p-2 w-full text-black"
@@ -215,6 +207,7 @@ const UserDataCollect = ({ colorMode }) => {
         <input
           type="text"
           name="skill"
+          value={personal_info.skill || ""}
           onChange={handleChangePersonal}
           placeholder="Your Skills (comma-separated)"
           className="border rounded-md p-2 w-full text-black"
@@ -223,7 +216,7 @@ const UserDataCollect = ({ colorMode }) => {
 
       {/* =============================================================================================================================== */}
       {/* Projects */}
-      <div className="mb-2">
+      <div className="mb-2 space-y-2">
         <h2 className="text-lg font-semibold">Projects</h2>
         {Array.isArray(projectData) && projectData.length > 0 ? (
           projectData.map((project, index) => (
@@ -252,18 +245,18 @@ const UserDataCollect = ({ colorMode }) => {
             </div>
           ))
         ) : (
-          <p>No projects to display</p> 
+          <p>No projects to display</p>
         )}
         <button
           onClick={handleProjectClick}
-          className="bg-blue-500 text-white p-2 rounded"
+          className="bg-blue-500 text-white p-2 rounded-full"
         >
           Add Project
         </button>
       </div>
       {/* ============================================================================================================================================= */}
       {/* Education */}
-      <div className="mb-2">
+      <div className="mb-2 space-y-2">
         <h2 className="text-lg font-semibold">Education</h2>
         {Array.isArray(educationData) && educationData.length > 0 ? (
           educationData.map((education, index) => (
@@ -292,25 +285,25 @@ const UserDataCollect = ({ colorMode }) => {
             </div>
           ))
         ) : (
-          <p>No education data available</p> 
+          <p>No education data available</p>
         )}
         <button
           onClick={handleEducationClick}
-          className="bg-blue-500 text-white p-2 rounded"
+          className="bg-blue-500 text-white p-2 rounded-full"
         >
           Add Education
         </button>
       </div>
       {/* ==================================================================================================================================================== */}
       {/* Work Experience */}
-      <div className="mb-2">
+      <div className="mb-2 space-y-2">
         <h2 className="text-lg font-semibold">Work Experience</h2>
         {Array.isArray(work_experience) && work_experience.length > 0 ? (
           work_experience.map((work, index) => (
             <div key={work.id} className="my-2">
               <input
                 id={work.id}
-                name="title"
+                name="company"
                 onChange={handleChangeWork}
                 value={work.company || ""}
                 type="text"
@@ -319,7 +312,7 @@ const UserDataCollect = ({ colorMode }) => {
               />
               <textarea
                 id={work.id}
-                name="description"
+                name="responsibilities"
                 onChange={handleChangeWork}
                 value={
                   Array.isArray(work.responsibilities)
@@ -329,14 +322,15 @@ const UserDataCollect = ({ colorMode }) => {
                 placeholder="Enter Work Description"
                 className="border rounded-md p-2 w-full text-black"
               />
+
             </div>
           ))
         ) : (
-          <p>No work experience data available</p> 
+          <p>No work experience data available</p>
         )}
         <button
           onClick={handleWorkClick}
-          className="bg-blue-500 text-white p-2 rounded"
+          className="bg-blue-500 text-white p-2 rounded-full"
         >
           Add Work
         </button>
@@ -344,7 +338,7 @@ const UserDataCollect = ({ colorMode }) => {
       {/* ================================================================================================================================================= */}
 
       {/* Awards */}
-      <div className="mb-2">
+      <div className="mb-2 space-y-2">
         <h2 className="text-lg font-semibold">Award</h2>
         <textarea
           onChange={handleChangeAwards}
@@ -352,12 +346,6 @@ const UserDataCollect = ({ colorMode }) => {
           placeholder="Enter award points, each on a new line"
           className="border rounded-md p-2 w-full text-black"
         />
-        <button
-          onClick={handleAwardClick}
-          className="bg-blue-500 text-white p-2 rounded"
-        >
-          Add Award Section
-        </button>
       </div>
     </div>
   );

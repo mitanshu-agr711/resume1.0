@@ -7,6 +7,7 @@ const ResumeState = (props) => {
 
   const [loading, setLoading] = useState(false);
 
+  
 
   const handlePrint = useReactToPrint({
     contentRef: componentRef,

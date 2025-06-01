@@ -11,6 +11,7 @@ import Build from './pages/buildarea.jsx';
 import AutoFill from './themes/AutoFill.jsx';
 import { AuroraBackground } from "./components/ui/background.jsx";
 import { motion } from "framer-motion";
+
 // import UserDetails from "./components/userDetails/userData.jsx"
 
 function App() {
@@ -51,12 +52,11 @@ function App() {
               <Route path="/templates" element={<Template colorMode={colorMode} />} />
               <Route path="/build" element={<Build colorMode={colorMode} />} />
               <Route path="/autofill" element={<AutoFill colorMode={colorMode} />} />
-              {/* <Route path="/hello" element={<UserDetails colorMode={colorMode} />} /> */}
+             
             </Routes>
            
           </motion.div>
         </AuroraBackground>
-         {/* < UserDetails colorMode={colorMode} /> */}
       </div>
     </ResumeState>
   );

@@ -40,25 +40,25 @@ const Theme3 = ({ componentRef }) => {
             </div>
 
    {/* ====================================================================================================================         */}
-                <div className="border w-full my-2"></div>
-                <div className="flex w-full my-4">
-                  <h3 className="text-md font-serif min-w-[175px]">Experience</h3>
-                  <div className="ml-6 w-full">
-                    {/* <p className="text-sm summary-text"> */}
-                    {  work_experience.map((work, index) => (
-                <div key={index} >
-                  <h4 className="text-lg font-semibold">{work.title}</h4>
-                  <ul className="list-disc ml-6 text-sm">
-                    {(Array.isArray(work.description) ? work.description : work.description.split(',')).map((descItem, descIndex) => (
-                      <li key={descIndex}>{descItem.trim()}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-                    {/* </p> */}
-                  </div>
-                </div>
-             
+             <section id="experience" className='my-4'>
+  <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">WORK EXPERIENCE</h3>
+  <div id='experience-set' className='my-2'>
+    {Array.isArray(work_experience) && work_experience.length > 0 ? (
+      work_experience.map((work, index) => (
+        <div key={work.id} className="mt-4">
+          <h4 className="text-lg font-semibold">{work.company || 'Company Name'}</h4>
+          <ul className="list-disc ml-6 text-sm">
+            {(Array.isArray(work.responsibilities) ? work.responsibilities : (work.responsibilities || '').split(',')).map((descItem, descIndex) => (
+              <li key={descIndex}>{descItem.trim()}</li>
+            ))}
+          </ul>
+        </div>
+      ))
+    ) : (
+      <p className="text-sm text-gray-600 mt-2 ml-4">No work experience available.</p>
+    )}
+  </div>
+</section>
 {/* ============================================================================================================================================================= */}
 <section id="education" className='my-4'>
         <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">EDUCATION</h3>
