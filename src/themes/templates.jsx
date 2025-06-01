@@ -10,6 +10,7 @@ const Template = () => {
 
   const handleSelectTemplate = (id) => {
     setSelectedTemplateId(id);
+    console.log('Selected Template ID:', id);
     navigate('/autofill');
   };
 

@@ -7,7 +7,6 @@ const ResumeState = (props) => {
 
   const [loading, setLoading] = useState(false);
 
-  console.log("componentRef", componentRef);
 
   const handlePrint = useReactToPrint({
     contentRef: componentRef,
@@ -36,7 +35,7 @@ const ResumeState = (props) => {
     setColorMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
   };
   const initialData = {
-    personalData: {
+    personal_info: {
       profileImage:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNI3kQLeYMnpy05PhEiuzS1rtRmNVL7VKvwcE4ACmQSQT1rRmUO5mHLyjH-mGHq0ueUQY&usqp=CAU",
       name: "Your Name",
@@ -56,7 +55,7 @@ const ResumeState = (props) => {
       educationTitles: { eTitle1: "Education Title 1" },
       educationDesc: { eDescription1: "Education Description 1" },
     },
-    workData: {
+    work_experience: {
       workTitles: { wTitle1: "Work Title 1" },
       workDesc: { wDescription1: "Work Description 1" },
     },
@@ -67,16 +66,12 @@ const ResumeState = (props) => {
 
 
   const [themeData, setThemeData] = useState(initialData);
-  // const [checkProj, setCheckProj] = useState(false);
-  // const [checkWork, setCheckWork] = useState(false);
-  // const [checkAward, setCheckAward] = useState(false);
-  // const [showComponent, setShowComponent] = useState(false);
   const [currentTheme, setCurrentTheme] = useState("Theme1");
   const [selectBtn, setSelectBtn] = useState(true);
   const [selectedTemplateId, setSelectedTemplateId] = useState(null);
   const [educationData, setEducationData] = useState([]);
   const [projectData,setProjectData]=useState([]);
-  const [workData,setWorkData]=useState([]);
+  const [work_experience,setwork_experience]=useState([]);
   const [award,setAwardData]=useState([]);
 
 
@@ -84,21 +79,16 @@ const ResumeState = (props) => {
     initialData,
     selectBtn,
     setSelectBtn,
-    // checkAward,
-    // setCheckAward,
+ 
     componentRef,
     handlePrint,
     currentTheme,
     setCurrentTheme,
-    // showComponent,
-    // setShowComponent,
+  
     loading,
     themeData,
     setThemeData,
-    // checkProj,
-    // checkWork,
-    // setCheckProj,
-    // setCheckWork,
+ 
     colorMode, 
     toggleColorMode, 
     selectedTemplateId, 
@@ -107,8 +97,8 @@ const ResumeState = (props) => {
     setEducationData,
     projectData,
     setProjectData,
-    workData,
-    setWorkData,
+    work_experience,
+    setwork_experience,
     award,
     setAwardData
   };

@@ -1,37 +1,41 @@
-import  { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext } from 'react';
+import PropTypes from 'prop-types';
 import Footer from '../components/footer/footer.jsx';
 
 import { ResumeContext } from '../context/resumeCreate.jsx';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const ResumeUpload = ({colorMode}) => {
-     const navigate = useNavigate();
-    
-   
+const ResumeUpload = ({ colorMode }) => {
+  const navigate = useNavigate();
+
+
   const [files, setFiles] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [dropActive, setDropActive] = useState(false);
   const fileInputRef = useRef(null);
-  const {  setThemeData } = useContext(ResumeContext);
+  const { setThemeData } = useContext(ResumeContext);
 
   const handleFileDrop = (e) => {
     e.preventDefault();
     setDropActive(false);
-    
+
     if (e.dataTransfer.files.length > 0) {
-      setFiles(Array.from(e.dataTransfer.files));
-      startUpload();
+      const selectedFiles = Array.from(e.dataTransfer.files);
+      setFiles(selectedFiles);
+      startUpload(selectedFiles);
     }
   };
 
   const handleFileSelect = (e) => {
     if (e.target.files.length > 0) {
-      setFiles(Array.from(e.target.files));
-      startUpload();
+      const selectedFiles = Array.from(e.target.files);
+      setFiles(selectedFiles);
+      startUpload(selectedFiles);
     }
   };
+
 
   const clearFiles = () => {
     setFiles([]);
@@ -40,24 +44,24 @@ const ResumeUpload = ({colorMode}) => {
   };
 
 
-  const startUpload = () => {
-    if (files.length === 0) return;
-  
+  const startUpload = (fileList) => {
+    if (!fileList || fileList.length === 0) return;
+
     setUploading(true);
     setProgress(0);
-  
+
     const interval = setInterval(() => {
       setProgress((prevProgress) => {
         const newProgress = prevProgress + 10;
-  
+
         if (newProgress >= 100) {
           clearInterval(interval);
           setUploading(false);
           setProcessing(true);
-  
+
           const formData = new FormData();
-          formData.append('file', files[0]);
-  
+          formData.append('file', fileList[0]);
+
           fetch('https://resume-parser-c3t2.onrender.com/parse-resume/', {
             method: 'POST',
             body: formData,
@@ -69,18 +73,14 @@ const ResumeUpload = ({colorMode}) => {
               return res.json();
             })
             .then((data) => {
-              console.log('Parsed data:', data);
               setProcessing(false);
-  
-              
               setThemeData(data);
-  
               navigate('/build');
             })
             .catch((err) => {
               console.error('Error parsing resume:', err);
               setProcessing(false);
-  
+
               if (err.message.includes('422')) {
                 alert("The resume couldn't be processed. Please check that it's a valid PDF file and try again.");
               } else {
@@ -88,14 +88,15 @@ const ResumeUpload = ({colorMode}) => {
               }
             });
         }
-  
+
         return newProgress;
       });
     }, 300);
   };
-  
-  
-  
+
+
+
+
 
   return (
     <section id="file-upload" className={`page-section min-h-screen py-10 px-4 ${colorMode === 'light' ? 'bg-gray-100' : 'bg-gray-900'}`}>
@@ -110,9 +111,8 @@ const ResumeUpload = ({colorMode}) => {
         <div className="grid md:grid-cols-2 gap-10 items-center justify-center">
           <div className="order-2 md:order-1">
             <div
-              className={`border-2 border-dashed rounded-lg p-8 h-80 flex flex-col items-center justify-center text-center ${
-                dropActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-blue-400'
-              }`}
+              className={`border-2 border-dashed rounded-lg p-8 h-80 flex flex-col items-center justify-center text-center ${dropActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-blue-400'
+                }`}
               onDragOver={(e) => {
                 e.preventDefault();
                 setDropActive(true);
@@ -140,6 +140,12 @@ const ResumeUpload = ({colorMode}) => {
                       ref={fileInputRef}
                     />
                   </label>
+                  <button
+                      onClick={() => navigate('/build')}
+                      className="mt-2 w-full text-center px-3 py-1 text-sm bg-gray-600 text-white rounded-md hover:bg-gray-700"
+                    >
+                      Build Without Resume
+                    </button>
                   <p className="mt-2 text-xs text-gray-500">Supported formats: PDF, DOCX, JPG, PNG</p>
                 </div>
               )}
@@ -165,6 +171,7 @@ const ResumeUpload = ({colorMode}) => {
                     >
                       Upload
                     </button>
+                   
                   </div>
                 </div>
               )}
@@ -227,9 +234,13 @@ const ResumeUpload = ({colorMode}) => {
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </section>
   );
 };
+ResumeUpload.propTypes = {
+  colorMode: PropTypes.string.isRequired
+};
 
 export default ResumeUpload;
+

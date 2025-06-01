@@ -1,10 +1,4 @@
 
-// import  { createContext } from 'react';
-
-// const ResumeContext = createContext();
-
-
-// export default ResumeContext;
 import { createContext, useRef } from 'react';
 
 const ResumeContext = createContext();

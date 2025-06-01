@@ -4,22 +4,31 @@ import { useContext } from 'react';
 import { ImLocation } from 'react-icons/im';
 import { GrMail } from 'react-icons/gr';
 import { BsFillTelephoneFill } from 'react-icons/bs';
-import { ResumeContext} from '../context/resumeCreate.jsx';
+import { ResumeContext } from '../context/resumeCreate.jsx';
 
 
 import { useReactToPrint } from 'react-to-print';
 
 const Theme1 = () => {
-  const { componentRef, themeData, educationData = [], projectData = [], workData = [], award = [] } = useContext(ResumeContext);
+  const { componentRef, themeData, educationData = [], projectData = [], work_experience = [], award = [] } = useContext(ResumeContext);
 
-  console.log("componentRef:", componentRef.current);
 
   const handlePrint = useReactToPrint({
     contentRef: componentRef,
   });
 
-  // Destructure personal data properties
-  const { name, address, phone, email, profile, skill } = themeData?.personalData || {};
+  if (!themeData || !themeData.personal_info) {
+    return <div>Loading...</div>;
+  }
+
+  const { name, address, phone, email, profile } = themeData?.personal_info || {};
+
+
+
+  console.log(projectData);
+
+
+
 
   return (
     <>
@@ -35,65 +44,82 @@ const Theme1 = () => {
         </header>
 
         {/* Skills Section */}
-        <section id="skills" className='my-4'>
-          <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">TECHNICAL SKILLS</h3>
-          <div id='skills-set' className='flex my-2'>
-            <div className='flex flex-wrap gap-2'>
-              {skill && skill.split(',').map((item, index) => (
-                <span key={index} className="inline-block bg-teal-200 text-teal-800 text-sm px-2 py-1 rounded-full m-1">
-                  {item.trim()}
-                </span>
-              ))}
+        {Array.isArray(themeData.skills) && (
+          <section id="skills" className='my-4'>
+            <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">TECHNICAL SKILLS</h3>
+            <div id='skills-set' className='flex my-2'>
+              <div className='flex flex-wrap gap-2'>
+                {themeData.skills.map((item, index) => (
+                  <span key={index} className="inline-block bg-teal-200 text-teal-800 text-sm px-2 py-1 rounded-full m-1">
+                    {item.trim()}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* Projects Section */}
         <section id="projects" className='my-4'>
           <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">PROJECTS</h3>
           <div id='project-set' className='my-2'>
-            {projectData.map((project, index) => (
-              <div key={index} className="mt-4">
-                <h4 className="text-lg font-semibold">{project.title}</h4>
-                <ul className="list-disc ml-6 text-sm">
-                  {(Array.isArray(project.description) ? project.description : project.description.split(',')).map((descItem, descIndex) => (
-                    <li key={descIndex}>{descItem.trim()}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            {Array.isArray(projectData) && projectData.length > 0 ? (
+              projectData.map((project, index) => (
+                <div key={index} className="mt-4">
+                  <h4 className="text-lg font-semibold">{project.title}</h4>
+                  <ul className="list-disc ml-6 text-sm">
+                    {(Array.isArray(project.description) ? project.description : project.description.split(',')).map((descItem, descIndex) => (
+                      <li key={descIndex}>{descItem.trim()}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            ) : (
+              <p className="text-sm text-gray-600 mt-2 ml-4">No projects available.</p>
+            )}
           </div>
         </section>
+
 
         {/* Education Section */}
         <section id="education" className='my-4'>
           <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">EDUCATION</h3>
           <div id='education-set' className='my-2'>
-            {educationData.map((element, index) => (
-              <div key={index} className="mt-4">
-                <h4 className="text-lg font-semibold">{element.title}</h4>
-                <p className="text-sm">{element.description}</p>
-              </div>
-            ))}
+            {Array.isArray(educationData) && educationData.length > 0 ? (
+              educationData.map((element, index) => (
+                <div key={index} className="mt-4">
+                  <h4 className="text-lg font-semibold">{element.degree}</h4>
+                  <p className="text-sm">{element.description}</p>
+                </div>
+              ))
+            ) : (
+              <p className="text-sm text-gray-600 mt-2 ml-4">No education details available.</p>
+            )}
           </div>
         </section>
+
 
         {/* Work Experience Section */}
         <section id="experience" className='my-4'>
           <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">WORK EXPERIENCE</h3>
           <div id='experience-set' className='my-2'>
-            {workData.map((work, index) => (
-              <div key={index} className="mt-4">
-                <h4 className="text-lg font-semibold">{work.title}</h4>
-                <ul className="list-disc ml-6 text-sm">
-                  {(Array.isArray(work.description) ? work.description : work.description.split(',')).map((descItem, descIndex) => (
-                    <li key={descIndex}>{descItem.trim()}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            {Array.isArray(work_experience) && work_experience.length > 0 ? (
+              work_experience.map((work, index) => (
+                <div key={index} className="mt-4">
+                  <h4 className="text-lg font-semibold">{work.title}</h4>
+                  <ul className="list-disc ml-6 text-sm">
+                    {(Array.isArray(work.description) ? work.description : work.description.split(',')).map((descItem, descIndex) => (
+                      <li key={descIndex}>{descItem.trim()}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            ) : (
+              <p className="text-sm text-gray-600 mt-2 ml-4">No work experience available.</p>
+            )}
           </div>
         </section>
+
 
         {/* Awards Section */}
         <section id="awards" className='my-4'>
@@ -108,7 +134,7 @@ const Theme1 = () => {
         </section>
       </div>
 
-      
+
     </>
   );
 };

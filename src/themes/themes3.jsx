@@ -3,10 +3,10 @@ import {ResumeContext} from '../context/resumeCreate.jsx';
 // import "./theme3.css";
 
 const Theme3 = ({ componentRef }) => {
-  const { themeData, educationData = [], workData = [], award=[] } = useContext(ResumeContext);
+  const { themeData, educationData = [],   work_experience = [], award=[] } = useContext(ResumeContext);
 
   // Destructure personal data properties
-  const { name, address, phone, email, profile,  summary, skill } = themeData.personalData;
+  const { name, address, phone, email, profile,  summary, skill } =  themeData?.personal_info || {};
   // console.log("descr  ",project.description)
 
 
@@ -45,7 +45,7 @@ const Theme3 = ({ componentRef }) => {
                   <h3 className="text-md font-serif min-w-[175px]">Experience</h3>
                   <div className="ml-6 w-full">
                     {/* <p className="text-sm summary-text"> */}
-                    {workData.map((work, index) => (
+                    {  work_experience.map((work, index) => (
                 <div key={index} >
                   <h4 className="text-lg font-semibold">{work.title}</h4>
                   <ul className="list-disc ml-6 text-sm">
@@ -60,21 +60,21 @@ const Theme3 = ({ componentRef }) => {
                 </div>
              
 {/* ============================================================================================================================================================= */}
-            <div className="border w-full my-2"></div>
-
-            <div className="flex w-full my-4">
-              <h3 className="text-md font-serif min-w-[175px]">Education</h3>
-              <div className="ml-6 w-full">
-                <p className="text-sm">
-                {educationData.map((element, index) => (
-                <div key={index}>
-                  <h4 className="text-lg font-semibold">{element.title}</h4>
-                  <p className="text-sm">{element.description}</p>
-                </div>
-              ))}
-                </p>
+<section id="education" className='my-4'>
+        <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">EDUCATION</h3>
+        <div id='education-set' className='my-2'>
+          {Array.isArray(educationData) && educationData.length > 0 ? (
+            educationData.map((element, index) => (
+              <div key={index} className="mt-4">
+                <h4 className="text-lg font-semibold">{element.degree}</h4>
+                <p className="text-sm">{element.description}</p>
               </div>
-            </div>
+            ))
+          ) : (
+            <p className="text-sm text-gray-600 mt-2 ml-4">No education details available.</p>
+          )}
+        </div>
+      </section>
 {/* ============================================================================================================================== */}
                 {/* <div className="border w-full my-2"></div>
                 <div className="flex w-full my-4">
