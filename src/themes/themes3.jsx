@@ -55,7 +55,7 @@ const Theme3 = ({ componentRef }) => {
         </div>
       ))
     ) : (
-      <p className="text-sm text-gray-600 mt-2 ml-4">No work experience available.</p>
+      <p className="text-sm text-gray-600 mt-2 ml-4">No work experience available & to add a new point, just press the Enter key.</p>
     )}
   </div>
 </section>
