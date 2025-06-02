@@ -15,6 +15,8 @@ const Theme2 = ({ componentRef }) => {
   }
 
   const { name, address, phone, email, profile } = themeData?.personal_info || {};
+  // console.log('Theme2 component rendered with themeData:', themeData);
+  // console.log('Theme2 component rendered with personal_info:', themeData?.personal_info);
   const { profileImage, skill = '', summary = '' } = themeData || {};
   const profileImageSrc = profileImage?.src || 'https://via.placeholder.com/150';
 
@@ -67,38 +69,46 @@ const Theme2 = ({ componentRef }) => {
                 ))}
               </div>
             </div>
+            
           </div>
 
           <div className="hidden md:block border-l border-black mx-4"></div>
 
           <div className="w-full md:w-3/5">
             {/* Education */}
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold mb-2">Education</h3>
-              {educationData.map((element, index) => (
-                <div key={index} className="mt-4">
-                  <h4 className="text-lg font-semibold">{element.title}</h4>
-                  <p className="text-sm">{element.description}</p>
-                </div>
-              ))}
-            </div>
+            <section id="education" className='my-4'>
+        <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">EDUCATION</h3>
+        <div id='education-set' className='my-2'>
+          {Array.isArray(educationData) && educationData.length > 0 ? (
+            educationData.map((element, index) => (
+              <div key={index} className="mt-4">
+                <h4 className="text-lg font-semibold">{element.degree}</h4>
+                <p className="text-sm">{element.description}</p>
+              </div>
+            ))
+          ) : (
+            <p className="text-sm text-gray-600 mt-2 ml-4">No education details available.</p>
+          )}
+        </div>
+      </section>
 
             {/* Projects */}
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold mt-6">Projects</h3>
-              {projectData.map((project, index) => (
-                <div key={index} className="mt-4">
-                  <h4 className="text-lg font-semibold">{project.title}</h4>
-                  <ul className="list-disc ml-6 text-sm">
-                    {(Array.isArray(project.description)
-                      ? project.description
-                      : (project.description || '').split(',')).map((descItem, descIndex) => (
-                        <li key={descIndex}>{descItem.trim()}</li>
-                      ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
+            <section id="projects" className='my-4'>
+              <h3 className="text-xl font-bold bg-teal-200 py-2 px-4 ">PROJECTS</h3>
+              <div id='projects-set' className='my-2'>
+                {Array.isArray(projectData) && projectData.length > 0 ? (
+                  projectData.map((project, index) => (
+                    <div key={index} className="mt-4">
+                      <h4 className="text-lg font-semibold">{project.title || project.name}</h4>
+                      <p className="text-sm">{project.description}</p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-sm text-gray-600 mt-2 ml-4">No projects available.</p>
+                )}
+              </div>
+            </section>
+             
 
             {/* Work Experience */}
             <section id="experience" className='my-4'>

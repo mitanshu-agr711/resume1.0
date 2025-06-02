@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 
 const UserDataCollect = () => {
   const {
-    checkAward,
-    setCheckAward,
+    // checkAward,
+    // setCheckAward,
     educationData,
     setEducationData,
     projectData,
@@ -15,18 +15,20 @@ const UserDataCollect = () => {
     award,
     setAwardData,
     themeData,
+    setThemeData,
   } = useContext(ResumeContext) || {};
 
   const [personal_info, setpersonal_info] = useState({
-    profileImage: "https://www.w3schools.com/howto/img_avatar.png",
-    name: "Your Name",
-    summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    profile: "Work Profile",
-    address: "Address Line",
-    phone: "Phone Number",
-    email: "Email Address",
-    skill: "Your, Skills, are, shown, here",
+    profileImage: "",
+    name: "",
+    summary: "",
+    profile: "",
+    address: "",
+    phone: "",
+    email: "",
+    skill: "",
   });
+
 
 
   useEffect(() => {
@@ -40,21 +42,27 @@ const UserDataCollect = () => {
   }, [themeData]);
 
 
-
-  // Personal data handler
   const handleChangePersonal = (e) => {
     const { name, value, files } = e.target;
+    let updatedPersonalInfo;
     if (name === "profileImage" && files && files[0]) {
-      setpersonal_info((prev) => ({
-        ...(Array.isArray(prev) ? prev : []),
+      updatedPersonalInfo = {
+        ...personal_info,
         profileImage: URL.createObjectURL(files[0]),
-      }));
-      // Clean up object URL when component unmounts
-      return () => URL.revokeObjectURL(personal_info.profileImage);
+      };
     } else {
-      setpersonal_info((prev) => ({ ...prev, [name]: value }));
+      updatedPersonalInfo = {
+        ...personal_info,
+        [name]: value,
+      };
     }
+    setpersonal_info(updatedPersonalInfo);
+    setThemeData({
+      ...themeData,
+      personal_info: updatedPersonalInfo,
+    });
   };
+
   // ===============================================================================================================================================
   // Work data handler
   const handleChangeWork = (e) => {
@@ -73,16 +81,14 @@ const UserDataCollect = () => {
       return newArr;
     });
   };
-
-
   const handleWorkClick = (e) => {
-  e.preventDefault();
-  const id = `work${work_experience.length}`;
-  setwork_experience((prev) => [
-    ...(Array.isArray(prev) ? prev : []),
-    { company: "", responsibilities: [], id }
-  ]);
-};
+    e.preventDefault();
+    const id = `work${work_experience.length}`;
+    setwork_experience((prev) => [
+      ...(Array.isArray(prev) ? prev : []),
+      { company: "", responsibilities: [], id }
+    ]);
+  };
 
   // ==================================================================================================================================================
   // Project data handler
@@ -167,6 +173,7 @@ const UserDataCollect = () => {
           placeholder="Your Name"
           className="border rounded-md p-2 w-full text-black"
         />
+
         <textarea
           name="summary"
           value={personal_info.summary || ""}
@@ -356,4 +363,4 @@ UserDataCollect.propTypes = {
   colorMode: PropTypes.string,
 };
 
-export default UserDataCollect;
+export default UserDataCollect;                

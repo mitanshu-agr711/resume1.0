@@ -24,7 +24,7 @@ const Theme1 = () => {
   // FIX: Process skills from personal_info.skill
   const skillsArray = skill ? skill.split(',') : [];
 
-  console.log(projectData);
+  // console.log(projectData);
 
 
 

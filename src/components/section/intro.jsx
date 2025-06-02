@@ -1,14 +1,14 @@
-// src/components/Introduction.jsx
+
 import homeLogo from '/assets/resume_imag.webp';
 import { useContext, useEffect, useRef } from 'react';
 import Footer from '../footer/footer.jsx';
 import { ResumeContext } from '../../context/resumeCreate.jsx';
-// import { Helmet } from 'react-helmet';
+
 import { Link } from 'react-router-dom';
 import gsap from "gsap";
 import TextPlugin from "gsap/TextPlugin";
 import { Button } from '../ui/moving-border.jsx';
-// import { Button } from '../ui/moving-border.jsx';
+
 
 
 gsap.registerPlugin(TextPlugin);
@@ -77,11 +77,11 @@ export default function Introduction({ colorMode }) {
                         </div>
                     </Link>
                 </div>
-                <div className="flex flex-col items-center space-y-4 my-10 md:w-[58%]" >
+                <div className="flex flex-col w-full items-center space-y-4 my-10 md:w-[58%]" >
                     <img
                         src={homeLogo}
                         alt="Illustration representing resume creation"
-                        className="my-4 w-[58%] h-auto  "
+                        className="my-4 w-full md:w-[60%] h-auto  "
                     />
                 </div>
             </div>
